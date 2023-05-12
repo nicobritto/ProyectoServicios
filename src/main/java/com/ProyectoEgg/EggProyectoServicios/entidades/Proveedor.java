@@ -2,23 +2,30 @@
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-
+@Entity
 public class Proveedor extends Persona{
+    
     
     private Long telefono;
     private String rubro;
-    private Byte foto;
     private Float calificacion;
+    
+    @OneToMany
     private List <Trabajo> trabajos;
-
+    
+    @OneToOne
+    private Imagen imagen;
+    
     public Proveedor() {
     }
 
     public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos) {
         this.telefono = telefono;
         this.rubro = rubro;
-        this.foto = foto;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
     }
@@ -27,12 +34,17 @@ public class Proveedor extends Persona{
         super(nombre, apellido, email);
         this.telefono = telefono;
         this.rubro = rubro;
-        this.foto = foto;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
     }
 
-    
+    public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, Imagen imagen) {
+        this.telefono = telefono;
+        this.rubro = rubro;
+        this.calificacion = calificacion;
+        this.trabajos = trabajos;
+        this.imagen = imagen;
+    }
 
     public Long getTelefono() {
         return telefono;
@@ -50,12 +62,12 @@ public class Proveedor extends Persona{
         this.rubro = rubro;
     }
 
-    public Byte getFoto() {
-        return foto;
+    public Imagen getImagen() {
+        return imagen;
     }
 
-    public void setFoto(Byte foto) {
-        this.foto = foto;
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 
     public Float getCalificacion() {
