@@ -13,8 +13,8 @@ public class Persona {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid")
+   
     private String id;
-    
     private String nombre;
     private String apellido;
     private String email;

@@ -20,7 +20,7 @@ public class Proveedor extends Persona{
     @OneToOne
     private Imagen imagen;
     
-    public Proveedor() {
+    public Proveedor(){
     }
 
     public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos) {
