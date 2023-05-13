@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 public class Proveedor extends Persona{
     
     
-    private Long telefono;
+    private String telefono;
     private String rubro;
     private Float calificacion;
     
@@ -23,14 +23,14 @@ public class Proveedor extends Persona{
     public Proveedor(){
     }
 
-    public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos) {
+    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos) {
         this.telefono = telefono;
         this.rubro = rubro;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
     }
 
-    public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, String nombre, String apellido, String email) {
+    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, String nombre, String apellido, String email) {
         super(nombre, apellido, email);
         this.telefono = telefono;
         this.rubro = rubro;
@@ -38,7 +38,7 @@ public class Proveedor extends Persona{
         this.trabajos = trabajos;
     }
 
-    public Proveedor(Long telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, Imagen imagen) {
+    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, Imagen imagen) {
         this.telefono = telefono;
         this.rubro = rubro;
         this.calificacion = calificacion;
@@ -46,11 +46,11 @@ public class Proveedor extends Persona{
         this.imagen = imagen;
     }
 
-    public Long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
