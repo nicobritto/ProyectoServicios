@@ -4,10 +4,11 @@ import com.ProyectoEgg.EggProyectoServicios.entidades.Imagen;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
+import java.util.ArrayList;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -38,6 +39,16 @@ public class ServicioProveedor {
         
         proveedorRepositorio.save(proveedor);
         
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Proveedor> listarTodos(){
+        
+        List<Proveedor> proveedores = new ArrayList();
+        
+        proveedores = proveedorRepositorio.findAll();
+        
+        return proveedores;
     }
     
     public void validar(String nombre,String email,String telefono ) throws Exception {
