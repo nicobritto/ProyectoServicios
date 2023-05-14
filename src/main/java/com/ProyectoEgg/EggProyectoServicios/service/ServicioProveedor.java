@@ -8,25 +8,29 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ServicioProveedor {
     
     @Autowired
-     ProveedorRepositorio proveedorRepositorio;
+     private ProveedorRepositorio proveedorRepositorio;
+     
+    @Autowired 
+     private ImagenServicio imagenServicio;
     
-        
     @Transactional  
-    public void crearProveedor(String nombre,String apellido,String email,String telefono,String rubro ) throws Exception  {
+    public void crearProveedor(String nombre,String apellido,String email,String telefono,String rubro,MultipartFile archivo ) throws Exception  {
         validar(nombre,email,telefono);
         List<Trabajo> trabajos=null;
-        Imagen imagen=new Imagen();
+    
+        Imagen imagen=imagenServicio.guardar(archivo);
         
         Proveedor proveedor =new Proveedor();
         proveedor.setApellido(apellido);
         proveedor.setCalificacion(null);
         proveedor.setEmail(email);
-        proveedor.setImagen(null);
+        proveedor.setImagen(imagen);
         proveedor.setTelefono(telefono);
         proveedor.setTrabajos(trabajos);
         proveedor.setRubro(rubro);

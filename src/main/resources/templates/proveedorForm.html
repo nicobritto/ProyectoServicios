@@ -9,7 +9,7 @@
     <body>
         <div class="container-fluid m-5 contenedor">
 
-            <form class="formulario" th:action= "@{/registro}" method="POST">
+            <form class="formulario" th:action= "@{/registro}" method="POST" enctype="multipart/form-data">
                 <div class="form-group my-3">
                     <label class="mb-2">Nombre</label> 
                     <input type="text" class="form-control" name="nombre" th:value="${nombre}">
@@ -25,15 +25,29 @@
                 </div>
                 <div class="form-group my-3">
                     <label class="mb-2">Tel</label> 
-                    <input type="text" class="form-control" name="telefono" th:value="${telefono}">
+                    <input type="number" class="form-control" name="telefono" th:value="${telefono}">
                 </div>
                 <div class="form-group my-3">
                     <label class="mb-2">Rubro</label> 
                     <input type="text" class="form-control" name="rubro" th:value="${rubro}">
                 </div>
+                <div>
+                      <label class="mb-2">Imagen</label> 
+                     <input type="file" name="archivo" placeholder="archivo" >
+                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
             </form>
+            
+            
+                            <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
+                                <div class="card-body">
+                                    <h5 class="card-title">Error!!!!</h5>
+                                    <p class="card-text" th:text="${error}"> </p>
+                                </div>
+                            </div>
+
+                           
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
