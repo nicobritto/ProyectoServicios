@@ -87,6 +87,18 @@ public class ServicioProveedor {
         proveedorRepositorio.delete(noticia);
         
     }
+     
+    public List<Proveedor> listarXrubro(String rubro){
+        
+        List<Proveedor> proveedores = new ArrayList();
+        
+        proveedores = proveedorRepositorio.buscarPorRubros(rubro);
+        
+        return proveedores;
+    }
+    
+    
+    
     public void validar(String nombre,String email,String telefono ) throws Exception {
       
         if (nombre.trim().isEmpty()) {

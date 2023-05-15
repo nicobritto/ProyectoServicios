@@ -78,4 +78,14 @@ public class ControllerProveedor {
             return "redirect:../proveedores";
         }
     }
+    
+     @GetMapping("/buscarPorRubro/{nombre}")
+    public String mostrarXrubro(ModelMap modelo , @PathVariable String nombre){
+        List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
+        
+        modelo.addAttribute("proveedores", proveedores);
+      
+        return "serviciosPlomeros.html";
+    }
+    
 }
