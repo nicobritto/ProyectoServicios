@@ -6,6 +6,7 @@ import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,41 @@ public class ServicioProveedor {
         return proveedores;
     }
     
+    @Transactional
+    public void modificarProveedor(String id, String nombre,String apellido,String email,String telefono,String rubro, MultipartFile archivo) throws Exception{
+       
+       validar(nombre,email,telefono);
+        
+       Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
+       
+       if(respuesta.isPresent()){
+           
+           Proveedor proveedor = respuesta.get();
+           Imagen imagen=imagenServicio.guardar(archivo);
+           
+           proveedor.setNombre(nombre);
+           proveedor.setApellido(apellido);
+           proveedor.setEmail(email);
+           proveedor.setTelefono(telefono);
+           proveedor.setRubro(rubro);
+           proveedor.setImagen(imagen);
+           
+           proveedorRepositorio.save(proveedor);
+       }
+    }
+    
+    public Proveedor getOne(String id){
+        
+        return proveedorRepositorio.getOne(id);
+    }
+    
+    public void eliminar(String id){
+        
+        Proveedor noticia = proveedorRepositorio.getById(id);
+        
+        proveedorRepositorio.delete(noticia);
+        
+    }
     public void validar(String nombre,String email,String telefono ) throws Exception {
       
         if (nombre.trim().isEmpty()) {
