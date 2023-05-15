@@ -68,7 +68,7 @@ public class ServicioProveedor {
            proveedor.setApellido(apellido);
            proveedor.setEmail(email);
            proveedor.setTelefono(telefono);
-           proveedor.setRubro(rubro);
+           proveedor.setRubro(rubro.toLowerCase());
            proveedor.setImagen(imagen);
            
            proveedorRepositorio.save(proveedor);

@@ -85,7 +85,11 @@ public class ControllerProveedor {
         
         modelo.addAttribute("proveedores", proveedores);
       
-        return "serviciosPlomeros.html";
+        if(nombre == "plomero"){
+            return "serviciosPlomeros.html";
+        }else{
+            return "serviciosGasistas.html";
+        }
     }
     
 }

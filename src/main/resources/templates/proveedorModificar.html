@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="container-fluid m-5 contenedor">
-
+            <h2>Ingrese sus datos:</h2>
             <form class="formulario" th:action="@{/modificar/__${proveedor.id}__}" method="POST" enctype="multipart/form-data">
                 <input hidden th:value="${id}" name="id">
                 <div class="form-group my-3">
@@ -38,6 +38,7 @@
                  </div>
 
                 <button type="submit" class="btn btn-primary mt-3 botones">Modificar</button>
+                <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">Cancelar</a>
             </form>
             
             
