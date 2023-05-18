@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Servicios</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/formulario.css">
+    </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"> </nav>
+        <h3>Todos los servicios</h3>
+        <div>
+            <table class="table table-responsive table-striped table-hover table-primary">
+                
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                         <th scope="col">Id</th>
+                        
+                    </tr>
+                </thead>
+                <tbody th:each="rubro : ${rubros}"> 
+                    <tr>
+                        <th scope="row" th:text="${rubro.rubros}"></th>
+                         <th scope="row" th:text="${rubro.id}"></th>
+                    
+                        
+                        <td>#</td>
+                            
+                        <td>
+                            
+                            <a th:href= "@{/rubro/modificar/__${rubro.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                        </td>
+                        <td>
+                            
+                            <a th:href= "@{/rubro/eliminar/__${rubro.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+                            <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
+                                <div class="card-body">
+                                    <h5 class="card-title">Error!!!!</h5>
+                                    <p class="card-text" th:text="${error}"> </p>
+                                </div>
+                            </div>
+
+        </div>
+        
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body>
+</html>
