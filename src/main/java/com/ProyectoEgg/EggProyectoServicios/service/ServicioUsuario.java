@@ -23,6 +23,4 @@ public class ServicioUsuario {
 
         usuarioRepositorio.save(usuario);
     }
-
-
 }

@@ -28,9 +28,13 @@ public class ControllerProveedor {
     }
         
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String email,@RequestParam String telefono,@RequestParam String rubro, MultipartFile archivo,ModelMap modelo){
+    public String registro(@RequestParam String nombre,@RequestParam String apellido,
+            @RequestParam String email,@RequestParam String telefono,@RequestParam String rubro, 
+            @RequestParam String password, @RequestParam String password2, @RequestParam Float honorarios,
+            MultipartFile archivo,ModelMap modelo){
         try {
-            servicioProveedor.crearProveedor(nombre,apellido,email,telefono,rubro,archivo);
+            servicioProveedor.crearProveedor(nombre,apellido,email,telefono,rubro, 
+                    password, password2, honorarios, archivo);
             modelo.put("exito"," todo fue un exito :D ");
             return "index.html";
         }catch (Exception e) {
@@ -55,9 +59,14 @@ public class ControllerProveedor {
     }
     
     @PostMapping("/modificar/{id}")
-    public String actualizacion(@PathVariable String id, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String email,@RequestParam String telefono,@RequestParam String rubro, MultipartFile archivo,ModelMap modelo){
+    public String actualizacion(@PathVariable String id, @RequestParam String nombre,
+            @RequestParam String apellido,@RequestParam String email,
+            @RequestParam String telefono,@RequestParam String rubro,
+            @RequestParam String password, @RequestParam String password2,
+            @RequestParam Float honorarios, MultipartFile archivo,ModelMap modelo){
         try {
-            servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,rubro,archivo);
+            servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,
+                    rubro, password, password2, honorarios, archivo);
             modelo.put("exito"," todo fue un exito :D ");
             return "index.html";
         }catch (Exception e) {
