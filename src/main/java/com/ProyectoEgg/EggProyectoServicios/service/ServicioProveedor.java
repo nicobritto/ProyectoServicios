@@ -5,6 +5,7 @@ import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
+import com.ProyectoEgg.EggProyectoServicios.excepciones.MiException;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ServicioProveedor {
             String telefono,String idRubro, String password, String password2, 
             Float honorarios, MultipartFile archivo ) throws Exception  {
         
-        validar(nombre,email,telefono);
+        validar(nombre,apellido,email,telefono,password,password2);
         List<Trabajo> trabajos=null;
         Rubro rubro=servicioRubro.getOne(idRubro);
     
@@ -69,7 +70,7 @@ public class ServicioProveedor {
             String email,String telefono,String idRubro, String password, 
             String password2, Float honorarios, MultipartFile archivo) throws Exception{
        
-       validar(nombre,email,telefono);
+       validar(nombre,apellido,email,telefono,password,password2);
         Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
@@ -115,21 +116,27 @@ public class ServicioProveedor {
     }
 
     
-    //Falta validar que sean iguales las contraseñas
-    public void validar(String nombre,String email,String telefono ) throws Exception {
+    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2) throws MiException {
       
         if (nombre.trim().isEmpty()) {
-            throw new Exception("nombre no puede ser nulo");
+            throw new MiException("Nombre no puede ser nulo");
         }
-       
+        if (apellido.trim().isEmpty()) {
+            throw new MiException("Apellido no puede ser nulo");
+        }       
         if (email.trim().isEmpty()) {
-            throw new Exception("email no puede ser nulo");
+            throw new MiException("Email no puede ser nulo");
         }
-        if (telefono.trim().isEmpty()) {
-            throw new Exception("telefono no puede ser nulo");
+        if (telefono.trim().isEmpty() || telefono.length() < 8) {
+            throw new MiException("Telefono no puede ser nulo o faltan caracteres");
         }
         
-
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
+        }
+        if (!password.equals(password2)) {
+            throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        }
     }
 
     
