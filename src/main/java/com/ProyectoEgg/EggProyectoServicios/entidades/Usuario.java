@@ -1,6 +1,7 @@
 
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
 import javax.persistence.Entity;
 
 @Entity
@@ -20,7 +21,14 @@ public class Usuario extends Persona {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email) {
-        super(nombre, apellido, email);
+    public Usuario(Trabajo trabajo) {
+        this.trabajo = trabajo;
     }
+
+    public Usuario(Trabajo trabajo, String id, String nombre, String apellido, String email, String password, Rol rol) {
+        super(id, nombre, apellido, email, password, rol);
+        this.trabajo = trabajo;
+    }
+
+    
 }
