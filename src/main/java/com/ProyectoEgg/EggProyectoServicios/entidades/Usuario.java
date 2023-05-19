@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 public class Usuario extends Persona {
 
 
-    private Trabajo trabajo;
+   /* private Trabajo trabajo;
 
     public Trabajo getTrabajo() {
         return trabajo;
@@ -29,6 +29,6 @@ public class Usuario extends Persona {
         super(id, nombre, apellido, email, password, rol);
         this.trabajo = trabajo;
     }
-
+*/
     
 }

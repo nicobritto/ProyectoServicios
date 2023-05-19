@@ -2,6 +2,7 @@ package com.ProyectoEgg.EggProyectoServicios.service;
 
 import com.ProyectoEgg.EggProyectoServicios.entidades.Imagen;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
@@ -22,14 +23,17 @@ public class ServicioProveedor {
      
     @Autowired 
      private ImagenServicio imagenServicio;
+    @Autowired
+    private ServicioRubro servicioRubro;
     
     @Transactional  
     public void crearProveedor(String nombre,String apellido,String email,
-            String telefono,String rubro, String password, String password2, 
+            String telefono,String idRubro, String password, String password2, 
             Float honorarios, MultipartFile archivo ) throws Exception  {
         
         validar(nombre,email,telefono);
         List<Trabajo> trabajos=null;
+        Rubro rubro=servicioRubro.getOne(idRubro);
     
         Imagen imagen=imagenServicio.guardar(archivo);
         
@@ -62,11 +66,11 @@ public class ServicioProveedor {
     
     @Transactional
     public void modificarProveedor(String id, String nombre,String apellido,
-            String email,String telefono,String rubro, String password, 
+            String email,String telefono,String idRubro, String password, 
             String password2, Float honorarios, MultipartFile archivo) throws Exception{
        
        validar(nombre,email,telefono);
-        
+        Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
        if(respuesta.isPresent()){
@@ -78,7 +82,7 @@ public class ServicioProveedor {
            proveedor.setApellido(apellido);
            proveedor.setEmail(email);
            proveedor.setTelefono(telefono);
-           proveedor.setRubro(rubro.toLowerCase());
+           proveedor.setRubro(rubro);
            proveedor.setImagen(imagen);
            proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
            proveedor.setRol(Rol.PROVEEDOR);
@@ -109,7 +113,7 @@ public class ServicioProveedor {
         
         return proveedores;
     }
-    
+
     
     //Falta validar que sean iguales las contraseñas
     public void validar(String nombre,String email,String telefono ) throws Exception {
