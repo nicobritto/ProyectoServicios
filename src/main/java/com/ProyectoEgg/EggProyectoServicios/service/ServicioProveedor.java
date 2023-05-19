@@ -3,11 +3,13 @@ package com.ProyectoEgg.EggProyectoServicios.service;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Imagen;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,13 +24,17 @@ public class ServicioProveedor {
      private ImagenServicio imagenServicio;
     
     @Transactional  
-    public void crearProveedor(String nombre,String apellido,String email,String telefono,String rubro,MultipartFile archivo ) throws Exception  {
+    public void crearProveedor(String nombre,String apellido,String email,
+            String telefono,String rubro, String password, String password2, 
+            Float honorarios, MultipartFile archivo ) throws Exception  {
+        
         validar(nombre,email,telefono);
         List<Trabajo> trabajos=null;
     
         Imagen imagen=imagenServicio.guardar(archivo);
         
         Proveedor proveedor =new Proveedor();
+        proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setCalificacion(null);
         proveedor.setEmail(email);
@@ -36,7 +42,9 @@ public class ServicioProveedor {
         proveedor.setTelefono(telefono);
         proveedor.setTrabajos(trabajos);
         proveedor.setRubro(rubro);
-        proveedor.setNombre(nombre);
+        proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+        proveedor.setRol(Rol.PROVEEDOR);
+        proveedor.setHonorarios(honorarios);
         
         proveedorRepositorio.save(proveedor);
         
@@ -53,7 +61,9 @@ public class ServicioProveedor {
     }
     
     @Transactional
-    public void modificarProveedor(String id, String nombre,String apellido,String email,String telefono,String rubro, MultipartFile archivo) throws Exception{
+    public void modificarProveedor(String id, String nombre,String apellido,
+            String email,String telefono,String rubro, String password, 
+            String password2, Float honorarios, MultipartFile archivo) throws Exception{
        
        validar(nombre,email,telefono);
         
@@ -70,6 +80,9 @@ public class ServicioProveedor {
            proveedor.setTelefono(telefono);
            proveedor.setRubro(rubro.toLowerCase());
            proveedor.setImagen(imagen);
+           proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+           proveedor.setRol(Rol.PROVEEDOR);
+           proveedor.setHonorarios(honorarios);
            
            proveedorRepositorio.save(proveedor);
        }
@@ -98,7 +111,7 @@ public class ServicioProveedor {
     }
     
     
-    
+    //Falta validar que sean iguales las contraseñas
     public void validar(String nombre,String email,String telefono ) throws Exception {
       
         if (nombre.trim().isEmpty()) {
