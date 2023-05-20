@@ -15,37 +15,38 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Rubro</th>
-                        <th scope="col">Contacto</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Mas info</th>
-                        <th scope="col">Acciones</th>
-                        <th scope="col">Acciones</th>
+                         <th scope="col">Id</th>
                         
                     </tr>
                 </thead>
-                <tbody th:each="proveedor : ${proveedores}"> 
+                <tbody th:each="rubro : ${rubros}"> 
                     <tr>
-                        <th scope="row" th:text="${proveedor.nombre}"></th>
-                        <td th:text="${proveedor.apellido}"></td>
-                        <td th:text="${proveedor.rubro}"></td>
-                        <td th:text="${proveedor.telefono}"></td>
-                        <td th:text="${proveedor.imagen.contenido}"></td>
+                        <th scope="row" th:text="${rubro.rubros}"></th>
+                         <th scope="row" th:text="${rubro.id}"></th>
+                    
+                        
                         <td>#</td>
                             
                         <td>
                             
-                            <a th:href= "@{/modificar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+                            <a th:href= "@{/rubro/modificar/__${rubro.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
                         </td>
                         <td>
                             
-                            <a th:href= "@{/eliminar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
+                            <a th:href= "@{/rubro/eliminar/__${rubro.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
+            
+                            <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
+                                <div class="card-body">
+                                    <h5 class="card-title">Error!!!!</h5>
+                                    <p class="card-text" th:text="${error}"> </p>
+                                </div>
+                            </div>
+
         </div>
         
         

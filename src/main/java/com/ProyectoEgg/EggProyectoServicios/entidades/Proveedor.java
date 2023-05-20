@@ -1,8 +1,10 @@
 
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -11,7 +13,8 @@ public class Proveedor extends Persona{
     
     
     private String telefono;
-    private String rubro;
+    @ManyToOne
+    private Rubro rubro;
     private Float calificacion;
     
     @OneToMany
@@ -20,31 +23,31 @@ public class Proveedor extends Persona{
     @OneToOne
     private Imagen imagen;
     
+    private Float honorarios;
+    
     public Proveedor(){
     }
 
-    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos) {
-        this.telefono = telefono;
-        this.rubro = rubro;
-        this.calificacion = calificacion;
-        this.trabajos = trabajos;
-    }
-
-    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, String nombre, String apellido, String email) {
-        super(nombre, apellido, email);
-        this.telefono = telefono;
-        this.rubro = rubro;
-        this.calificacion = calificacion;
-        this.trabajos = trabajos;
-    }
-
-    public Proveedor(String telefono, String rubro, Byte foto, Float calificacion, List<Trabajo> trabajos, Imagen imagen) {
+    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios) {
         this.telefono = telefono;
         this.rubro = rubro;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
         this.imagen = imagen;
+        this.honorarios = honorarios;
     }
+
+    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String id, String nombre, String apellido, String email, String password, Rol rol) {
+        super(id, nombre, apellido, email, password, rol);
+        this.telefono = telefono;
+        this.rubro = rubro;
+        this.calificacion = calificacion;
+        this.trabajos = trabajos;
+        this.imagen = imagen;
+        this.honorarios = honorarios;
+    }
+
+    
 
     public String getTelefono() {
         return telefono;
@@ -54,13 +57,15 @@ public class Proveedor extends Persona{
         this.telefono = telefono;
     }
 
-    public String getRubro() {
+    public Rubro getRubro() {
         return rubro;
     }
 
-    public void setRubro(String rubro) {
+    public void setRubro(Rubro rubro) {
         this.rubro = rubro;
     }
+
+    
 
     public Imagen getImagen() {
         return imagen;
@@ -84,6 +89,14 @@ public class Proveedor extends Persona{
 
     public void setTrabajos(List<Trabajo> trabajos) {
         this.trabajos = trabajos;
+    }
+
+    public Float getHonorarios() {
+        return honorarios;
+    }
+
+    public void setHonorarios(Float honorarios) {
+        this.honorarios = honorarios;
     }
 
     

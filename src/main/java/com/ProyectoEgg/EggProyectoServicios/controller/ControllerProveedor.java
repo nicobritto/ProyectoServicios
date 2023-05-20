@@ -1,7 +1,9 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioProveedor;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioRubro;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,16 +23,24 @@ public class ControllerProveedor {
     
     @Autowired
     private ServicioProveedor servicioProveedor;
-     
+    @Autowired
+    private ServicioRubro servicioRubro;
+    
     @GetMapping("/registrar")
-    public String registrar() {
+    public String registrar(ModelMap model) {
+        List<Rubro> rubros = servicioRubro.listarRubros();
+        model.addAttribute("rubros", rubros);
         return "proveedorForm.html";
     }
         
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String email,@RequestParam String telefono,@RequestParam String rubro, MultipartFile archivo,ModelMap modelo){
+    public String registro(@RequestParam String nombre,@RequestParam String apellido,
+            @RequestParam String email,@RequestParam String telefono,@RequestParam String idRubro, 
+            @RequestParam String password, @RequestParam String password2, @RequestParam Float honorarios,
+            MultipartFile archivo,ModelMap modelo){
         try {
-            servicioProveedor.crearProveedor(nombre,apellido,email,telefono,rubro,archivo);
+            servicioProveedor.crearProveedor(nombre,apellido,email,telefono,idRubro, 
+                    password, password2, honorarios, archivo);
             modelo.put("exito"," todo fue un exito :D ");
             return "index.html";
         }catch (Exception e) {
@@ -47,17 +57,25 @@ public class ControllerProveedor {
       
         return "servicios_todos.html";
     }
-           
+           //ok hasta aca
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo){
+         List<Rubro> rubros = servicioRubro.listarRubros();
+        modelo.addAttribute("rubros", rubros);
         modelo.put("proveedor", servicioProveedor.getOne(id));
+        
         return "proveedorModificar.html";
     }
     
     @PostMapping("/modificar/{id}")
-    public String actualizacion(@PathVariable String id, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String email,@RequestParam String telefono,@RequestParam String rubro, MultipartFile archivo,ModelMap modelo){
+    public String actualizacion(@PathVariable String id, @RequestParam String nombre,
+            @RequestParam String apellido,@RequestParam String email,
+            @RequestParam String telefono,@RequestParam String idRubro,
+            @RequestParam String password, @RequestParam String password2,
+            @RequestParam Float honorarios, MultipartFile archivo,ModelMap modelo){
         try {
-            servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,rubro,archivo);
+            servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,
+                    idRubro, password, password2, honorarios, archivo);
             modelo.put("exito"," todo fue un exito :D ");
             return "index.html";
         }catch (Exception e) {
@@ -91,5 +109,7 @@ public class ControllerProveedor {
             return "serviciosGasistas.html";
         }
     }
+
+
     
 }

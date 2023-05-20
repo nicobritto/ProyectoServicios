@@ -2,12 +2,16 @@ package com.ProyectoEgg.EggProyectoServicios.service;
 
 import com.ProyectoEgg.EggProyectoServicios.entidades.Imagen;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
+import com.ProyectoEgg.EggProyectoServicios.excepciones.MiException;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.ProveedorRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,15 +24,22 @@ public class ServicioProveedor {
      
     @Autowired 
      private ImagenServicio imagenServicio;
+    @Autowired
+    private ServicioRubro servicioRubro;
     
     @Transactional  
-    public void crearProveedor(String nombre,String apellido,String email,String telefono,String rubro,MultipartFile archivo ) throws Exception  {
-        validar(nombre,email,telefono);
+    public void crearProveedor(String nombre,String apellido,String email,
+            String telefono,String idRubro, String password, String password2, 
+            Float honorarios, MultipartFile archivo ) throws Exception  {
+        
+        validar(nombre,apellido,email,telefono,password,password2);
         List<Trabajo> trabajos=null;
+        Rubro rubro=servicioRubro.getOne(idRubro);
     
         Imagen imagen=imagenServicio.guardar(archivo);
         
         Proveedor proveedor =new Proveedor();
+        proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setCalificacion(null);
         proveedor.setEmail(email);
@@ -36,7 +47,9 @@ public class ServicioProveedor {
         proveedor.setTelefono(telefono);
         proveedor.setTrabajos(trabajos);
         proveedor.setRubro(rubro);
-        proveedor.setNombre(nombre);
+        proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+        proveedor.setRol(Rol.PROVEEDOR);
+        proveedor.setHonorarios(honorarios);
         
         proveedorRepositorio.save(proveedor);
         
@@ -53,10 +66,12 @@ public class ServicioProveedor {
     }
     
     @Transactional
-    public void modificarProveedor(String id, String nombre,String apellido,String email,String telefono,String rubro, MultipartFile archivo) throws Exception{
+    public void modificarProveedor(String id, String nombre,String apellido,
+            String email,String telefono,String idRubro, String password, 
+            String password2, Float honorarios, MultipartFile archivo) throws Exception{
        
-       validar(nombre,email,telefono);
-        
+       validar(nombre,apellido,email,telefono,password,password2);
+        Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
        if(respuesta.isPresent()){
@@ -68,8 +83,11 @@ public class ServicioProveedor {
            proveedor.setApellido(apellido);
            proveedor.setEmail(email);
            proveedor.setTelefono(telefono);
-           proveedor.setRubro(rubro.toLowerCase());
+           proveedor.setRubro(rubro);
            proveedor.setImagen(imagen);
+           proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
+           proveedor.setRol(Rol.PROVEEDOR);
+           proveedor.setHonorarios(honorarios);
            
            proveedorRepositorio.save(proveedor);
        }
@@ -96,23 +114,29 @@ public class ServicioProveedor {
         
         return proveedores;
     }
+
     
-    
-    
-    public void validar(String nombre,String email,String telefono ) throws Exception {
+    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2) throws MiException {
       
         if (nombre.trim().isEmpty()) {
-            throw new Exception("nombre no puede ser nulo");
+            throw new MiException("Nombre no puede ser nulo");
         }
-       
+        if (apellido.trim().isEmpty()) {
+            throw new MiException("Apellido no puede ser nulo");
+        }       
         if (email.trim().isEmpty()) {
-            throw new Exception("email no puede ser nulo");
+            throw new MiException("Email no puede ser nulo");
         }
-        if (telefono.trim().isEmpty()) {
-            throw new Exception("telefono no puede ser nulo");
+        if (telefono.trim().isEmpty() || telefono.length() < 8) {
+            throw new MiException("Telefono no puede ser nulo o faltan caracteres");
         }
         
-
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
+        }
+        if (!password.equals(password2)) {
+            throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        }
     }
 
     

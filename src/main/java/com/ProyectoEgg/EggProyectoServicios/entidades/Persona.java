@@ -1,7 +1,8 @@
-
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
-import javax.persistence.Entity;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -18,14 +19,21 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String email;
-
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+    
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String email) {
+    public Persona(String id, String nombre, String apellido, String email, String password, Rol rol) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.password = password;
+        this.rol = rol;
     }
 
     public String getId() {
@@ -59,6 +67,22 @@ public class Persona {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
     
     
