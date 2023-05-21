@@ -37,18 +37,20 @@ public class Proveedor extends Persona{
         this.honorarios = honorarios;
     }
 
-    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String id, String nombre, String apellido, String email, String password, Rol rol) {
-        super(id, nombre, apellido, email, password, rol);
+    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String id, String nombre, String apellido, String email, String password, String password2, Rol rol) {
+        super(id, nombre, apellido, email, password,password2, rol);
         this.telefono = telefono;
         this.rubro = rubro;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
         this.imagen = imagen;
         this.honorarios = honorarios;
+        
+       
     }
 
     
-
+  
     public String getTelefono() {
         return telefono;
     }

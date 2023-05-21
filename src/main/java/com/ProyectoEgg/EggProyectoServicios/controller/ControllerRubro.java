@@ -32,9 +32,9 @@ public class ControllerRubro {
     
     
      @PostMapping("/guardar")
-    public String registro(@RequestParam String nombre,ModelMap modelo){
+    public String registro(@RequestParam String rubros,ModelMap modelo){
         try {
-            servicioRubro.crearRubro(nombre);
+            servicioRubro.crearRubro(rubros);
             modelo.put("exito"," todo fue un exito :D ");
             return "redirect:../rubro/listaRubros";
         }catch (Exception e) {
