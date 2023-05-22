@@ -97,7 +97,8 @@ public class ControllerProveedor {
         }
     }
     
-     @GetMapping("/buscarPorRubro/{nombre}")
+    //Hay que cambiar este controller
+    @GetMapping("/buscarPorRubro/{nombre}")
     public String mostrarXrubro(ModelMap modelo , @PathVariable String nombre){
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
         

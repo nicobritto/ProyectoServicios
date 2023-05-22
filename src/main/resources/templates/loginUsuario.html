@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="utf-8" >
         <title>Inicio de sesión</title>
@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="container-fluid m-5 contenedor">
-            <form class="formulario" th:action="@{/login}" method="POST">
+            <form class="formulario" th:action="@{/logincheck}" method="POST">
                 <div class="form-group my-3">
                     <h3 class="card-title">Accedé a tu cuenta</h3>
                 </div>
