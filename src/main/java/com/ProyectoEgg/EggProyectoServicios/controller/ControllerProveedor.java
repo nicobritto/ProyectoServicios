@@ -41,7 +41,7 @@ public class ControllerProveedor {
         try {
             servicioProveedor.crearProveedor(nombre,apellido,email,telefono,idRubro, 
                     password, password2, honorarios, archivo);
-            modelo.put("exito"," todo fue un exito :D ");
+            modelo.put("exito","Se registró correctamente!");
             return "index.html";
         }catch (Exception e) {
             modelo.put("error", e.getMessage());
@@ -76,7 +76,7 @@ public class ControllerProveedor {
         try {
             servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,
                     idRubro, password, password2, honorarios, archivo);
-            modelo.put("exito"," todo fue un exito :D ");
+            modelo.put("exito","Proveedor modificado con exito!");
             return "index.html";
         }catch (Exception e) {
             modelo.put("error", e.getMessage());

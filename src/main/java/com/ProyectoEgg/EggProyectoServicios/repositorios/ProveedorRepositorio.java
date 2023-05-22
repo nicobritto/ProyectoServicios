@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface ProveedorRepositorio extends JpaRepository<Proveedor, String>{
     
     //Hay que cambiar esta consulta
-    @Query("SELECT p FROM Proveedor p WHERE p.rubro = :rubro")
+    @Query("SELECT p FROM Proveedor p WHERE p.rubro.rubros LIKE :rubro")
     public  List<Proveedor> buscarPorRubros(@Param("rubro") String rubro);
     
     @Query("SELECT p FROM Proveedor p WHERE p.email = :email")

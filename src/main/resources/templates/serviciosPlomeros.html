@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <meta charset="ISO-8859-1">
-        <title>Servicios</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/formulario.css">
-    </head>
+    <head th:replace="/fragments/head :: head"> </head>
     <body>
         <nav th:replace="/fragments/navbar :: nav"> </nav>
         <h3>Plomeros</h3>
@@ -20,8 +15,8 @@
                         <th scope="col">Contacto</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Mas info</th>
-                        <th scope="col">Acciones</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                         
                     </tr>
                 </thead>
@@ -29,16 +24,16 @@
                     <tr>
                         <th scope="row" th:text="${proveedor.nombre}"></th>
                         <td th:text="${proveedor.apellido}"></td>
-                        <td th:text="${proveedor.rubro}"></td>
+                        <td th:text="${proveedor.rubro.rubros}"></td>
                         <td th:text="${proveedor.telefono}"></td>
                         <td th:text="${proveedor.imagen.contenido}"></td>
                         <td>#</td>
                             
-                        <td>
+                        <td sec:authorize="hasRole('ADMIN')">
                             
                             <a th:href= "@{/modificar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
                         </td>
-                        <td>
+                        <td sec:authorize="hasRole('ADMIN')">
                             
                             <a th:href= "@{/eliminar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
                         </td>
