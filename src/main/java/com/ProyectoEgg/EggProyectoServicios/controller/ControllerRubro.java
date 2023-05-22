@@ -31,7 +31,7 @@ public class ControllerRubro {
     public String registro(@RequestParam String rubros,ModelMap modelo){
         try {
             servicioRubro.crearRubro(rubros);
-            modelo.put("exito"," todo fue un exito :D ");
+            modelo.put("exito","Rubro guardado con exito!");
             return "redirect:../rubro/listaRubros";
         }catch (Exception e) {
             modelo.put("error", e.getMessage());
@@ -63,7 +63,7 @@ public class ControllerRubro {
     public String actualizar(@RequestParam String rubros,@PathVariable String id,ModelMap model){
         try {
             servicioRubro.modificarRubro( rubros,id);
-            model.put("exito"," todo fue un exito :D ");
+            model.put("exito","Rubro modificado correctamente");
             return "redirect:../listaRubros";
         }catch (Exception e) {
              model.put("error", e.getMessage());
