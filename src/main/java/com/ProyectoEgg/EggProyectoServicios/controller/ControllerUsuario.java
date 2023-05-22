@@ -16,7 +16,7 @@ public class ControllerUsuario {
 
     @GetMapping("/registrar")
     public String registrar(){
-        return "usuarioForm.html";
+        return "index.html";
     }
 
     @PostMapping("/registro")
