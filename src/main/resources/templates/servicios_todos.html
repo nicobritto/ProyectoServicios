@@ -20,8 +20,8 @@
                         <th scope="col">Contacto</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Mas info</th>
-                        <th scope="col">Acciones</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                         
                     </tr>
                 </thead>
@@ -34,11 +34,11 @@
                         <td th:text="${proveedor.imagen.contenido}"></td>
                         <td>#</td>
                             
-                        <td>
+                        <td  sec:authorize="hasRole('ADMIN')">
                             
                             <a th:href= "@{/modificar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
                         </td>
-                        <td>
+                        <td  sec:authorize="hasRole('ADMIN')">
                             
                             <a th:href= "@{/eliminar/__${proveedor.id}__}"><i class="fas fa-feather-alt"></i> Eliminar</a>
                         </td>

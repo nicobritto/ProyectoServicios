@@ -20,7 +20,6 @@ public class Persona {
     private String apellido;
     private String email;
     private String password;
-    private String password2;
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -28,22 +27,13 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String id, String nombre, String apellido, String email, String password, String password2, Rol rol) {
+    public Persona(String id, String nombre, String apellido, String email, String password, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
         this.rol = rol;
-        this.password2 = password2;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
     }
 
     public String getId() {
