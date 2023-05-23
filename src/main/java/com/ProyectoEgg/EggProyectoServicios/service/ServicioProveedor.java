@@ -74,17 +74,28 @@ public class ServicioProveedor {
         Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
+       
+       
        if(respuesta.isPresent()){
            
-           Proveedor proveedor = respuesta.get();
-           Imagen imagen=imagenServicio.guardar(archivo);
            
+           Proveedor proveedor = respuesta.get();  
+           
+            String idImagen = null;
+            if (proveedor.getImagen() != null) {
+                idImagen = proveedor.getImagen().getId();
+            }
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+            proveedor.setImagen(imagen);
+           
+          
            proveedor.setNombre(nombre);
            proveedor.setApellido(apellido);
            proveedor.setEmail(email);
            proveedor.setTelefono(telefono);
            proveedor.setRubro(rubro);
-           proveedor.setImagen(imagen);
+          
            proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
            proveedor.setRol(Rol.PROVEEDOR);
            proveedor.setHonorarios(honorarios);

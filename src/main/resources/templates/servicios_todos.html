@@ -40,6 +40,13 @@
                     </tr>
 
                 </tbody>
+                
+            <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
+                <div class="card-body">
+                    <h5 class="card-title">Error!!!!</h5>
+                    <p class="card-text" th:text="${error}"> </p>
+                </div>
+            </div>
             </table>
         </div>
         

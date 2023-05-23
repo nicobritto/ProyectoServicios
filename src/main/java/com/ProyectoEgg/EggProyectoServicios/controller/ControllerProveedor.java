@@ -70,17 +70,21 @@ public class ControllerProveedor {
     @PostMapping("/modificar/{id}")
     public String actualizacion(@PathVariable String id, @RequestParam String nombre,
             @RequestParam String apellido,@RequestParam String email,
-            @RequestParam String telefono,@RequestParam String idRubro,
+            @RequestParam String telefono,@RequestParam(required = false)String idRubro,
             @RequestParam String password, @RequestParam String password2,
-            @RequestParam Float honorarios, MultipartFile archivo,ModelMap modelo){
+            @RequestParam(required = false)Float honorarios, MultipartFile archivo,ModelMap modelo){
         try {
             servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,
                     idRubro, password, password2, honorarios, archivo);
             modelo.put("exito","Proveedor modificado con exito!");
             return "index.html";
         }catch (Exception e) {
-            modelo.put("error", e.getMessage());
-            return "proveedorModificar.html";
+             List<Rubro> rubros = servicioRubro.listarRubros();
+             modelo.put("id",id);
+             modelo.addAttribute("rubros", rubros);
+             modelo.put("proveedor", servicioProveedor.getOne(id));
+             modelo.put("error", e.getMessage());
+        return "proveedorModificar.html";
         }
     }
     
