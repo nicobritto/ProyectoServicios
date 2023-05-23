@@ -32,7 +32,7 @@ public class ServicioProveedor {
             String telefono,String idRubro, String password, String password2, 
             Float honorarios, MultipartFile archivo ) throws Exception  {
         
-        validar(nombre,apellido,email,telefono,password,password2);
+        validar(nombre,apellido,email,telefono,password,password2,honorarios);
         List<Trabajo> trabajos=null;
         Rubro rubro=servicioRubro.getOne(idRubro);
     
@@ -70,7 +70,7 @@ public class ServicioProveedor {
             String email,String telefono,String idRubro, String password, 
             String password2, Float honorarios, MultipartFile archivo) throws Exception{
        
-       validar(nombre,apellido,email,telefono,password,password2);
+       validar(nombre,apellido,email,telefono,password,password2,honorarios);
         Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
@@ -116,7 +116,7 @@ public class ServicioProveedor {
     }
 
     
-    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2) throws MiException {
+    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2,Float honorarios) throws MiException {
       
         if (nombre.trim().isEmpty()) {
             throw new MiException("Nombre no puede ser nulo");
@@ -137,12 +137,12 @@ public class ServicioProveedor {
         if (!password.equals(password2)) {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
-    }
+         if ( honorarios==null || honorarios<1 ) {
+            throw new MiException(" honorarios no puede estar vacía, y debe tener más de 5 dígitos");
+        }
+       
+         
+          }
 
-    
-        
-
-    
-    
     
 }

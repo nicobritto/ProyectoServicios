@@ -42,9 +42,14 @@ public class ServicioRubro {
         rubroRepositorio.deleteById(id);
     }
     
-      public Rubro getOne(String id){
-        
-        return rubroRepositorio.getOne(id);
+      public Rubro getOne(String id) throws Exception{
+         Optional<Rubro> rta = rubroRepositorio.findById(id);
+          if (rta.isPresent()) {
+              return rubroRepositorio.getOne(id); 
+        }else{
+            throw new Exception("el rubro no puede ser nulo ");
+          }
+     
     }
 
     

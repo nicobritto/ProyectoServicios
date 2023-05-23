@@ -35,8 +35,8 @@ public class ControllerProveedor {
         
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre,@RequestParam String apellido,
-            @RequestParam String email,@RequestParam String telefono,@RequestParam String idRubro, 
-            @RequestParam String password, @RequestParam String password2, @RequestParam Float honorarios,
+            @RequestParam String email,@RequestParam String telefono,@RequestParam(required = false) String idRubro, 
+            @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Float honorarios,
             MultipartFile archivo,ModelMap modelo){
         try {
             servicioProveedor.crearProveedor(nombre,apellido,email,telefono,idRubro, 
