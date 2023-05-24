@@ -16,19 +16,20 @@ public class ControllerUsuario {
 
     @GetMapping("/registrar")
     public String registrar(){
-        return "index.html";
+        return "usuarioForm.html";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, ModelMap modelo){
+    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email,   @RequestParam String password, @RequestParam String password2, ModelMap modelo){
 
     try{
 
-        servicioUsuario.crearUsuario(nombre, apellido, email);
+        servicioUsuario.crearUsuario(nombre,apellido,email, password,  password2);
         modelo.put("exito","usuario creado con exito");
         return "index.html";
+        
     }catch (Exception e){
-        modelo.put("Error", e);
+        modelo.put("error", e);
         return "usuarioForm.html";
     }
 
