@@ -49,10 +49,10 @@ public class ControllerUsuario {
 
     @PostMapping("/modificar/{id}")
     public String actualizacion(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
-                                @RequestParam String email, @RequestParam String password, ModelMap modelo){
+                                @RequestParam String email, @RequestParam String password, String password2, ModelMap modelo){
 
         try {
-            servicioUsuario.modificarUsuario(id, nombre, apellido, email, password);
+            servicioUsuario.modificarUsuario(id, nombre, apellido, email, password, password2);
             modelo.put("Exito", "Usuario modificado con exito");
             return "index.html";
         }catch (Exception e){

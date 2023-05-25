@@ -26,7 +26,7 @@ public class ServicioUsuario {
     @Transactional
     public void crearUsuario(String nombre,String apellido,String email,String password, String password2) throws Exception{
         
-        validar(nombre,apellido,email, password);
+        validar(nombre,apellido,email, password, password2);
         
         Usuario usuario = new Usuario();
         usuario.setNombre(nombre);
@@ -64,8 +64,8 @@ public class ServicioUsuario {
 
     }
 
-    public void modificarUsuario(String id, String nombre, String apellido,String email, String password) throws Exception{
-        validar( nombre, apellido,  email,  password);
+    public void modificarUsuario(String id, String nombre, String apellido,String email, String password, String password2) throws Exception{
+        validar( nombre, apellido,  email,  password, password2);
         Optional<Usuario> respuesta= usuarioRepositorio.findById(id);
 
         if(respuesta.isPresent()){
@@ -82,7 +82,7 @@ public class ServicioUsuario {
     }
 
     
-    public void validar(String nombre,String apellido,String email,String password) throws MiException {
+    public void validar(String nombre,String apellido,String email,String password,String password2) throws MiException {
       
         if (nombre.trim().isEmpty()) {
             throw new MiException("Nombre no puede ser nulo");
@@ -97,9 +97,9 @@ public class ServicioUsuario {
         if (password.isEmpty() || password == null || password.length() <= 5) {
             throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
         }
-        //if (!password.equals(password2)) {
-        //    throw new MiException("Las contraseñas ingresadas deben ser iguales");
-        //}
+        if (!password.equals(password2)) {
+            throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        }
          
           }
     
