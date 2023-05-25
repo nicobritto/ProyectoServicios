@@ -1,0 +1,32 @@
+.navbar{
+     max-height:120px; /* Alto del navbar */
+}
+
+.btn:hover {
+  background: linear-gradient(to right, #8548F7, #6499F0); /* Fondo degradado de rojo a azul */
+  /* Otros estilos de botón */
+  color: white;
+  /* ... */
+}
+.footer-image {
+  width: 200px; /* Para achicar la imagen */
+  height: auto;
+}
+.text-body-secondary {
+  color: black; /* Para cambiar el color de la palabra CONTACTO */
+}
+
+.contacto:hover {
+  background: linear-gradient(to right, #8548F7, #6499F0);
+  /* Para cambiar el color del fondo de la palabra CONTACTO */
+}
+
+.custom-card-img {
+  width: 100%; /* Tamaño personalizado */
+  height: 250px; /* Altura ajustada automáticamente */
+}
+
+.custom-card1-img {
+  width: 100%; /* Tamaño personalizado */
+  height: 275px; /* Altura ajustada automáticamente */
+}
