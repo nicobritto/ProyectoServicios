@@ -108,11 +108,10 @@ public class ControllerProveedor {
         
         modelo.addAttribute("proveedores", proveedores);
       
-        if(nombre == "plomero"){
+        // serviciosPlomeros retorna cualquier vista de proveedor 
+        // borrar estos comentarios cuando vean si funca bien
             return "serviciosPlomeros.html";
-        }else{
-            return "serviciosGasistas.html";
-        }
+        
     }
 
     @GetMapping("/masInfo/{id}")
