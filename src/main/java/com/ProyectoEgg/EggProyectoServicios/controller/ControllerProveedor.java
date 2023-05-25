@@ -115,6 +115,12 @@ public class ControllerProveedor {
         }
     }
 
-
+    @GetMapping("/masInfo/{id}")
+    public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo){
+        
+        modelo.put("proveedor", servicioProveedor.getOne(id));
+        
+        return "masInfoProveedor.html";
+    }
     
 }

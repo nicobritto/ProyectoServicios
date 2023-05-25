@@ -54,7 +54,7 @@ public class ControllerRubro {
     }
     
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, ModelMap modelo){
+    public String modificar(@PathVariable String id, ModelMap modelo) throws Exception{
         modelo.put("rubro", servicioRubro.getOne(id));
         return "rubroEditar.html";
     }
