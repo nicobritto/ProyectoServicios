@@ -1,66 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#DCA6FC !important">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <button class="btn" type="submit"  th:if="${session.usuariosession != null}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-                    </li>
-                </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom-width hide-navbar" >
+    <a class="navbar-brand" href="#">
+        <img th:src="@{/logoSinFondo.png}" alt="Logo" />
+    </a>
 
-                <button class="btn" type="submit"  th:if="${session.usuariosession != null}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Servicios
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                            <li><a class="dropdown-item"  th:href="@{/proveedores}">Todos los Servicios</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/gasista}">Gasistas</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/plomero}">Plomeros</a></li>
-                        </ul>
-                    </li>
-                </button>
-                <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rubros
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                            <li><a class="dropdown-item"   th:href="@{/rubro/registrarRubro}" >Agregar</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" name="nombre"  th:href="@{/rubro/listaRubros}">Listar</a></li>
-                            
-                        </ul>
-                    </li>
-                </button>
+    <div class="navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+            <button class="btn" type="submit"  th:if="${session.usuariosession != null}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+            </button>
+            <button class="btn" type="submit"  th:if="${session.usuariosession != null}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <li><a class="dropdown-item"  th:href="@{/proveedores}">Todos los Servicios</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/gasista}">Gasistas</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/plomero}">Plomeros</a></li>
+                    </ul>
+                </li>
+            </button>
+            <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Rubros
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                        <li><a class="dropdown-item"   th:href="@{/rubro/registrarRubro}" >Agregar</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" name="nombre"  th:href="@{/rubro/listaRubros}">Listar</a></li>
 
-                <button class="btn" type="submit"  th:if="${session.usuariosession == null}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/registrar}">Registrarse como Proveedor</a>
-                    </li>
-                </button>
+                    </ul>
+                </li>
+            </button>
 
-                <button class="btn" type="submit"  th:if="${session.usuariosession == null}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"  th:href="@{/usuarios/registrar}">Registrarse como Usuario</a>
-                    </li>
-                </button>
+            <button class="btn" type="submit"  th:if="${session.usuariosession == null}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/registrar}">Registrarse como Proveedor</a>
+                </li>
+            </button>
 
-                <button class="btn" type="submit" th:if="${session.usuariosession != null}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"  href="/logout">Cerrar sesion</a>
-                    </li>
-                </button>
+            <button class="btn" type="submit"  th:if="${session.usuariosession == null}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  th:href="@{/usuarios/registrar}">Registrarse como Usuario</a>
+                </li>
+            </button>
 
-            </ul>
-            <form class="d-flex" th:if="${session.usuariosession != null}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+            <button class="btn" type="submit" th:if="${session.usuariosession != null}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  href="/logout">Cerrar sesion</a>
+                </li>
+            </button>
+
+        </ul>
     </div>
+
+
+    <form class="d-flex" th:if="${session.usuariosession != null}">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    
 </nav>
 
 
