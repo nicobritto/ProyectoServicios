@@ -116,16 +116,13 @@ public class ControllerProveedor {
         }
     }
     
-    //Hay que cambiar este controller
     @GetMapping("/buscarPorRubro/{nombre}")
     public String mostrarXrubro(ModelMap modelo , @PathVariable String nombre){
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
         
         modelo.addAttribute("proveedores", proveedores);
       
-        // serviciosPlomeros retorna cualquier vista de proveedor 
-        // borrar estos comentarios cuando vean si funca bien
-            return "serviciosPlomeros.html";
+            return "serviciosPorRubro.html";
         
     }
 

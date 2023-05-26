@@ -1,0 +1,24 @@
+<nav class="navbarLogin navbar-expand-lg navbar-light bg-light navbar-custom-width hide-navbar" >
+    <a class="navbar-brand" href="#">
+        <img th:src="@{/logoSinFondo.png}" alt="Logo" />
+    </a>
+
+    <button class="btn" type="submit">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/registrar}">Crear cuenta de Proveedor</a>
+        </li>
+    </button>
+
+    <button class="btn" type="submit">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page"  th:href="@{/usuarios/registrar}">Crear cuenta de Usuario</a>
+        </li>
+    </button>
+    
+    <button class="btn" type="submit">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page"  th:href="@{/}">Ingresar sin cuenta</a>
+        </li>
+    </button>
+
+</nav>

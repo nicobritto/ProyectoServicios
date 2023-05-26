@@ -12,8 +12,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Rubro</th>
-                        <th scope="col">Contacto</th>
-                        <th scope="col">Foto</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN,PROVEEDOR,USER')">Contacto</th>
                         <th scope="col">Mas info</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Modificar</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Eliminar</th>
@@ -25,8 +24,7 @@
                         <th scope="row" th:text="${proveedor.nombre}"></th>
                         <td th:text="${proveedor.apellido}"></td>
                         <td th:text="${proveedor.rubro.rubros}"></td>
-                        <td th:text="${proveedor.telefono}"></td>
-                        <td th:text="${proveedor.imagen.contenido}"></td>
+                        <td sec:authorize="hasRole('ADMIN,PROVEEDOR,USER')" th:text="${proveedor.telefono}"></td>
                         <td>
                             <button type="button" class="btn btn-outline-secondary">
                                 <a th:href="@{/masInfo/__${proveedor.id}__}">
