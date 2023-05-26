@@ -2,33 +2,42 @@
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
 import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario extends Persona {
 
-
-   /* private Trabajo trabajo;
-
-    public Trabajo getTrabajo() {
-        return trabajo;
-    }
-
-    public void setTrabajo(Trabajo trabajo) {
-        this.trabajo = trabajo;
-    }
+    @OneToMany
+    private List <Trabajo> trabajos;
 
     public Usuario() {
     }
 
-    public Usuario(Trabajo trabajo) {
-        this.trabajo = trabajo;
+    public Usuario(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
     }
 
-    public Usuario(Trabajo trabajo, String id, String nombre, String apellido, String email, String password, Rol rol) {
+    public Usuario(List<Trabajo> trabajos, String id, String nombre, String apellido, String email, String password, Rol rol) {
         super(id, nombre, apellido, email, password, rol);
-        this.trabajo = trabajo;
+        this.trabajos = trabajos;
     }
-*/
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
+
+
+
     
+    
+
+ 
+    
+
 }

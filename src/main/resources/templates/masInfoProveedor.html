@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <div class="container">
+            
+            <p><img class="logo"  th:src="@{/imagen/perfil/__${proveedor.id}__}" ></p>
+            <p>Nombre: <span th:text="${proveedor.nombre}"></p>
+            <p>Apellido: <span th:text="${proveedor.apellido}"></p>
+            <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></p>
+            <p>Teléfono: <span th:text="${proveedor.telefono}"></p>
+            <p>Email:  <span th:text="${proveedor.email}"></p>
+            <p>Calificación:  <span th:text="${proveedor.calificacion}"></p>
+            <p>Precio del servicio por hora:  $<span th:text="${proveedor.honorarios}"></p>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Contratar">
+        <a class="btn btn-primary" th:href="@{/proveedores}" role="button">Volver</a>
+    </body>
+</html>

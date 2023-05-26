@@ -1,10 +1,19 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Persona;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Solicitud;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Estado;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioProveedor;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioRubro;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioSolicitud;
+import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +34,12 @@ public class ControllerProveedor {
     private ServicioProveedor servicioProveedor;
     @Autowired
     private ServicioRubro servicioRubro;
+    
+    @Autowired
+    private ServicioSolicitud servicioSolicitud;
+    
+    @Autowired
+    private TrabajoServicio servicioTrabajo;
     
     @GetMapping("/registrar")
     public String registrar(ModelMap model) {
@@ -108,13 +123,69 @@ public class ControllerProveedor {
         
         modelo.addAttribute("proveedores", proveedores);
       
-        if(nombre == "plomero"){
+        // serviciosPlomeros retorna cualquier vista de proveedor 
+        // borrar estos comentarios cuando vean si funca bien
             return "serviciosPlomeros.html";
-        }else{
-            return "serviciosGasistas.html";
-        }
+        
     }
 
+    @GetMapping("/masInfo/{id}")
+    public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo){
+        
+        modelo.put("proveedor", servicioProveedor.getOne(id));
+        
+        return "masInfoProveedor.html";
+    }
+    
+    @GetMapping("/notificaciones")
+    public String mostrarNotificaciones(ModelMap modelo, HttpSession session){
 
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+       
+        try {
+            // buenas tati mañana no voy a estar me parece asi q te dejo esto nose si te va funcionar 
+            // borra todo este kilombo de comentarios cuando lo veas cuando hice el merge se borro el boton 
+            //de notificaciones ese era conflicto
+            
+            // CREO que anda no estoy seguro pero como no tiene nada setiado no muestra nada setiado en el estado no muestra nada
+           // Trabajo trabajo=servicioTrabajo.buscarTrabajoPorIdProvedoor(logeado.getId());
+           
+           // este anda porque le setie el estado la que se me ocurre es poner la lista de abajo
+           Trabajo trabajo=new Trabajo();
+            trabajo.setEstado(Estado.ACEPTADO);
+            // una lista desordenada con los tres valores y que seleccione el q quiera 
+           /*
+               <select name="estado">
+                    <option value="ACEPTADO">ACEPTADO</option>
+                    <option value="RECHAZADO" selected>RECHAZADO</option>
+                    <option value="CONFIRMADO">CONFIRMADO</option>
+                </select>*/
+           
+            
+            modelo.put("trabajo", trabajo);
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        modelo.put("solicitud", solicitudes);
+        
+        
+        return "notificaciones.html";
+    }
+    
+    //No funciona
+    @PostMapping("/trabajo")
+    public String crearTrabajo(HttpSession session, ModelMap modelo,@RequestParam String estado){
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        
+        
+        Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado));
+        
+        return "notificaciones.html";
+    }
     
 }

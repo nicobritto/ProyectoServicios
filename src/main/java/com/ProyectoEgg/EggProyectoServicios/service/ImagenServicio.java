@@ -32,6 +32,7 @@ public class ImagenServicio {
         return null;
     }
     
+    @Transactional
      public Imagen actualizar(MultipartFile archivo, String id) throws Exception {
 
         if (archivo != null && id != null) {
