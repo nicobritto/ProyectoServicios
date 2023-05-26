@@ -3,7 +3,9 @@ package com.ProyectoEgg.EggProyectoServicios.service;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Estado;
+import com.ProyectoEgg.EggProyectoServicios.excepciones.MiException;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.TrabajoRepositorio;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,17 @@ public class TrabajoServicio {
         trabajoRepositorio.save(trabajo);
         
         return trabajo;
+        
+    }
+    
+    public Trabajo buscarTrabajoPorIdProvedoor(String idProve)throws Exception{
+        
+        Optional<Trabajo> trabajo=trabajoRepositorio.buscarTrabajoPorIdPRoveedor(idProve);
+        if (trabajo.isPresent()) {
+            Trabajo trabajito=trabajo.get();
+            return trabajito;
+        }
+         throw new MiException("trabajo por id de proveedor no encotnradoasd");
         
     }
     

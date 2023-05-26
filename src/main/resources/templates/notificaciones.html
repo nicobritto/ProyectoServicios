@@ -11,6 +11,15 @@
             <p>Email:  <span th:text="${solicitud.usuario.email}"></p>
             
         </div>
+        
+           <select name="estado">
+                        <option>Seleccionar estado</option>
+                        <option th:each="trabajo : ${trabajo}" th:value="${trabajo.estado}" th:text="${trabajo.estado}"></option>
+           </select>
+        
+    
+        
+        
         <input class="btn btn-primary" type="submit" th:value="ACEPTADO" th:href="@{/trabajo}">
         <input class="btn btn-primary" type="submit" th:value="RECHAZADO" th:href="@{/trabajo}">
         <a class="btn btn-primary" th:href="@{/}" role="button">Volver</a>
