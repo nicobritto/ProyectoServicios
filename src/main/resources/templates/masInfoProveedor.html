@@ -6,7 +6,7 @@
 
         <div class="container">
             
-            <p>Foto <span th:text="${proveedor.imagen.contenido}"></p>
+            <p><img class="logo"  th:src="@{/imagen/perfil/__${proveedor.id}__}" ></p>
             <p>Nombre: <span th:text="${proveedor.nombre}"></p>
             <p>Apellido: <span th:text="${proveedor.apellido}"></p>
             <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></p>
