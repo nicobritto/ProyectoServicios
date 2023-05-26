@@ -1,10 +1,17 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Persona;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Rubro;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Solicitud;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Estado;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioProveedor;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioRubro;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioSolicitud;
+import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +32,12 @@ public class ControllerProveedor {
     private ServicioProveedor servicioProveedor;
     @Autowired
     private ServicioRubro servicioRubro;
+    
+    @Autowired
+    private ServicioSolicitud servicioSolicitud;
+    
+    @Autowired
+    private TrabajoServicio servicioTrabajo;
     
     @GetMapping("/registrar")
     public String registrar(ModelMap model) {
@@ -120,6 +133,31 @@ public class ControllerProveedor {
         modelo.put("proveedor", servicioProveedor.getOne(id));
         
         return "masInfoProveedor.html";
+    }
+    
+    @GetMapping("/notificaciones")
+    public String mostrarNotificaciones(ModelMap modelo, HttpSession session){
+
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+        
+        modelo.put("solicitud", solicitudes);
+        
+        return "notificaciones.html";
+    }
+    
+    //No funciona
+    @PostMapping("/trabajo")
+    public String crearTrabajo(HttpSession session, ModelMap modelo,@RequestParam String estado){
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        
+        
+        Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado));
+        
+        return "notificaciones.html";
     }
     
 }

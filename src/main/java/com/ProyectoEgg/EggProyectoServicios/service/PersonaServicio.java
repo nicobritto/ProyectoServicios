@@ -67,9 +67,6 @@ public class PersonaServicio implements UserDetailsService{
             
             permisos.add(p);
             
-            /*Utilizamos los atributos que nos otorga el pedido al servlet, 
-                para poder guardar la información de nuestra HttpSession.*/
-            
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             
             HttpSession session = attr.getRequest().getSession(true);

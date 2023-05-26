@@ -31,7 +31,7 @@
                             <li><a class="dropdown-item"   th:href="@{/rubro/registrarRubro}" >Agregar</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" name="nombre"  th:href="@{/rubro/listaRubros}">Listar</a></li>
-                            
+
                         </ul>
                     </li>
                 </button>
@@ -55,10 +55,17 @@
                 </button>
 
             </ul>
-            <form class="d-flex" th:if="${session.usuariosession != null}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+
+
+            <button type="submit" class="btn btn-primary position-relative">
+                
+                <a class="nav-link active" aria-current="page"  th:href="@{/notificaciones}">
+                    Notificaciones
+                </a>
+                
+                
+            </button>
+
         </div>
     </div>
 </nav>

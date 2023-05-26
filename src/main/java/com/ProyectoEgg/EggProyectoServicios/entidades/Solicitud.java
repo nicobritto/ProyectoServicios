@@ -1,41 +1,42 @@
-
 package com.ProyectoEgg.EggProyectoServicios.entidades;
 
-import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Estado;
+import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Trabajo {
+public class Solicitud {
     
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
     
-    @Enumerated(EnumType.STRING)
-    private Estado estado;
-    
-    @ManyToOne
-    private Proveedor proveedor;
+    private Boolean estado; //True:en espera
     
     @OneToOne
-    private Voto voto;
+    private Usuario usuario;
+    
+    @OneToOne
+    private Proveedor proveedor;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
-    public Trabajo() {
+    public Solicitud() {
     }
 
-    public Trabajo(String id, Estado estado, Proveedor proveedor, Voto voto) {
+    public Solicitud(String id, Boolean estado, Usuario usuario, Proveedor proveedor, Date fecha) {
         this.id = id;
         this.estado = estado;
+        this.usuario = usuario;
         this.proveedor = proveedor;
-        this.voto = voto;
+        this.fecha = fecha;
     }
 
     public String getId() {
@@ -46,12 +47,20 @@ public class Trabajo {
         this.id = id;
     }
 
-    public Estado getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Proveedor getProveedor() {
@@ -62,14 +71,13 @@ public class Trabajo {
         this.proveedor = proveedor;
     }
 
-    public Voto getVoto() {
-        return voto;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setVoto(Voto voto) {
-        this.voto = voto;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
-    
     
     
 }
