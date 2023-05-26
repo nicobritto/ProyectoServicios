@@ -32,6 +32,8 @@ public class Usuario extends Persona {
         this.trabajos = trabajos;
     }
 
+
+
     
     
 
