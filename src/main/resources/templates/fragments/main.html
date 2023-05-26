@@ -1,118 +1,121 @@
 
 <main>
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
+    <section class="py-5 container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <p class="lead text-body-secondary custom-texto">FAMILIAS FELICES</p>
+                <br>
+                <p class="lead text-body-secondary custom-texto2">MAS DE 30 AÑOS DE EXPERIENCIA.</p>
+            </div>
+            <div class="row2">
+                <div class="col-lg-6 col-md-8 mx-auto d-flex justify-content-start align-items-center">
+                     <a href="#" class="btn my-2 lead text-body-secondary custom-btn">Nosotros</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/Gasista.jpg}" alt="Gasista" class="bd-placeholder-img card-img-top custom-card1-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de gasistas matriculados altamente calificados.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                    
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/carpintero.jpg}" alt="carpintero" class="bd-placeholder-img card-img-top custom-card-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de carpinteros altamente calificados capaces de remorfar y darle vida a tu hogar.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/pintor.jpg}" alt="pintor" class="bd-placeholder-img card-img-top custom-card-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de pintores altamente calificados para darle color a cada hogar.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                   
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/plomero.jpg}" alt="plomero" class="bd-placeholder-img card-img-top custom-card-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de plomeros altamente calificados.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/electricista.png}" alt="electricista" class="bd-placeholder-img card-img-top custom-card-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de electricistas matriculados altamente calificados.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                   
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img th:src="@{/herrero.jpg}" alt="herrero" class="bd-placeholder-img card-img-top custom-card-img">
+                        <div class="card-body">
+                            <p class="card-text">Contamos con una flota de herreros altamente calificados.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver perfiles</button>
+                                   
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+
+            </div>
+        </div>
     </div>
-  </section>
-
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-             <img th:src="@{/Gasista.jpg}" alt="Gasista" class="bd-placeholder-img card-img-top custom-card1-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de gasistas matriculados altamente calificados.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img th:src="@{/carpintero.jpg}" alt="carpintero" class="bd-placeholder-img card-img-top custom-card-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de carpinteros altamente calificados capaces de remorfar y darle vida a tu hogar.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img th:src="@{/pintor.jpg}" alt="pintor" class="bd-placeholder-img card-img-top custom-card-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de pintores altamente calificados para darle color a cada hogar.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img th:src="@{/plomero.jpg}" alt="plomero" class="bd-placeholder-img card-img-top custom-card-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de plomeros altamente calificados.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img th:src="@{/electricista.png}" alt="electricista" class="bd-placeholder-img card-img-top custom-card-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de electricistas matriculados altamente calificados.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-          
-        <div class="col">
-          <div class="card shadow-sm">
-            <img th:src="@{/herrero.jpg}" alt="herrero" class="bd-placeholder-img card-img-top custom-card-img">
-            <div class="card-body">
-              <p class="card-text">Contamos con una flota de herreros altamente calificados.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>  
-          
-      </div>
-    </div>
-  </div>
 
 </main>

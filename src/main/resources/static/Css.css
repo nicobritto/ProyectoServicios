@@ -1,32 +1,77 @@
 .navbar{
-     max-height:120px; /* Alto del navbar */
+    max-height:120px; /* Alto del navbar */
 }
 
 .btn:hover {
-  background: linear-gradient(to right, #8548F7, #6499F0); /* Fondo degradado de rojo a azul */
-  /* Otros estilos de botón */
-  color: white;
-  /* ... */
+    background: linear-gradient(to right, #8548F7, #6499F0); /* Fondo degradado de rojo a azul */
+    /* Otros estilos de botón */
+    color: white;
+    /* ... */
 }
 .footer-image {
-  width: 200px; /* Para achicar la imagen */
-  height: auto;
+    width: 200px; /* Para achicar la imagen */
+    height: auto;
 }
 .text-body-secondary {
-  color: black; /* Para cambiar el color de la palabra CONTACTO */
+    color: black; /* Para cambiar el color de la palabra CONTACTO */
 }
 
 .contacto:hover {
-  background: linear-gradient(to right, #8548F7, #6499F0);
-  /* Para cambiar el color del fondo de la palabra CONTACTO */
+    background: linear-gradient(to right, #8548F7, #6499F0);
+    /* Para cambiar el color del fondo de la palabra CONTACTO */
 }
 
 .custom-card-img {
-  width: 100%; /* Tamaño personalizado */
-  height: 250px; /* Altura ajustada automáticamente */
+    width: 100%; /* Tamaño personalizado */
+    height: 250px; /* Altura ajustada automáticamente */
 }
 
 .custom-card1-img {
-  width: 100%; /* Tamaño personalizado */
-  height: 275px; /* Altura ajustada automáticamente */
+    width: 100%; /* Tamaño personalizado */
+    height: 275px; /* Altura ajustada automáticamente */
 }
+
+.container {
+    background-image: url("fotoSelectIndex.jpg");
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.custom-texto {
+    text-align: left;
+    margin-left: -250px;
+}
+
+.custom-texto2 {
+    text-align: left;
+    margin-left: -250px;
+}
+
+.custom-btn {
+    margin-left: -250px; /* Ajusta el valor según tus necesidades */
+    font-weight: bold;
+}
+
+.custom-texto {
+    font-weight: bold;
+
+}
+
+.custom-texto2 {
+    font-weight: bold;
+
+}
+
+.custom-texto {
+    background-color: rgba(230, 230, 230, 0.8); /* Establece un color de fondo semi-transparente */
+    backdrop-filter: blur(0,1px); /* Aplica un desenfoque al fondo */
+    display: inline;
+}
+
+.custom-texto2 {
+    background-color: rgba(255, 255, 255, 0.8); /* Establece un color de fondo semi-transparente */
+    backdrop-filter: blur(0,1px); /* Aplica un desenfoque al fondo */
+    display: inline;
+}
+
