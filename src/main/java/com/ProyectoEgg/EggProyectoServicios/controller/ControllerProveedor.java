@@ -66,8 +66,12 @@ public class ControllerProveedor {
     @GetMapping("/proveedores")
     public String mostrarTodos(ModelMap modelo) {
         List<Proveedor> proveedores = servicioProveedor.listarTodos();
-
+        List<Rubro> rubros = servicioRubro.listarRubros();
+        
+        modelo.addAttribute("rubros", rubros);
         modelo.addAttribute("proveedores", proveedores);
+
+      
 
         return "servicios_todos.html";
     }
@@ -116,9 +120,11 @@ public class ControllerProveedor {
             return "redirect:../proveedores";
         }
     }
+    
+    //Hay que cambiar este controller
+    @GetMapping("/buscarPorRubro")
+    public String mostrarXrubro(ModelMap modelo , @RequestParam String nombre){
 
-    @GetMapping("/buscarPorRubro/{nombre}")
-    public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
         modelo.addAttribute("proveedores", proveedores);
