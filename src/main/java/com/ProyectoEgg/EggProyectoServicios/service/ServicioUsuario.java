@@ -33,7 +33,7 @@ public class ServicioUsuario {
         usuario.setApellido(apellido);
         usuario.setEmail(email);
         usuario.setRol(Rol.USER);
-        usuario.setPassword(password);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         
         usuarioRepositorio.save(usuario);
     }

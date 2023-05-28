@@ -37,6 +37,19 @@
             </ul>
         </li>
     </button>
+    <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('PROVEEDOR')">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mis Trabajos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
+                <li><a class="dropdown-item" th:href="@{/notificaciones}">Solicitudes</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" name="nombre"  th:href="@{/aceptados}">Aceptados</a></li>
+
+            </ul>
+        </li>
+    </button>
 
     <button class="btn" type="submit" th:if="${session.usuariosession != null}">
         <li class="nav-item dropdown">
@@ -44,22 +57,14 @@
                 Perfil
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
+                <li><a class="dropdown-item"   th:href="@{/masInfo/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Mi perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item"   th:href="@{/modificar/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Modificar datos</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" name="nombre" href="/logout">Cerrar sesion</a></li>
 
             </ul>
         </li>
-    </button>
-
-
-    <button type="submit" class="btn btn-primary position-relative" sec:authorize="hasRole('PROVEEDOR')">
-
-        <a class="nav-link active" aria-current="page"  th:href="@{/notificaciones}">
-            Notificaciones
-        </a>
-
-
     </button>
 
 </div>

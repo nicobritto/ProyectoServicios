@@ -42,7 +42,7 @@ public class ServicioSolicitud {
     }
     
     @Transactional
-    public void modificar(String id, Boolean estado){
+    public void modificarEstado(String id, Boolean estado){
         
         Optional<Solicitud> respuesta = solicitudRepositorio.findById(id);
         
@@ -63,5 +63,10 @@ public class ServicioSolicitud {
         
         return solicitudes;
         
+    }
+    
+     public Solicitud getOne(String id){
+        
+        return solicitudRepositorio.getOne(id);
     }
 }
