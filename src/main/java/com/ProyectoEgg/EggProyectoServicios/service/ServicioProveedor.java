@@ -116,7 +116,7 @@ public class ServicioProveedor {
         proveedorRepositorio.delete(noticia);
         
     }
-     
+
     public List<Proveedor> listarXrubro(String rubro){
         
         List<Proveedor> proveedores = new ArrayList();
