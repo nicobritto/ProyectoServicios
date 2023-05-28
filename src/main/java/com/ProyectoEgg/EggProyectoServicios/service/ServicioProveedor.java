@@ -30,9 +30,10 @@ public class ServicioProveedor {
     @Transactional  
     public void crearProveedor(String nombre,String apellido,String email,
             String telefono,String idRubro, String password, String password2, 
-            Float honorarios, MultipartFile archivo ) throws Exception  {
+            Float honorarios, String descripcionTrabajo, MultipartFile archivo ) throws Exception  {
         
         validar(nombre,apellido,email,telefono,password,password2,honorarios);
+        
         List<Trabajo> trabajos=null;
         Rubro rubro=servicioRubro.getOne(idRubro);
     
@@ -50,6 +51,7 @@ public class ServicioProveedor {
         proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
         proveedor.setRol(Rol.PROVEEDOR);
         proveedor.setHonorarios(honorarios);
+        proveedor.setDescripcionTrabajo(descripcionTrabajo);
         
         proveedorRepositorio.save(proveedor);
         
@@ -68,7 +70,8 @@ public class ServicioProveedor {
     @Transactional
     public void modificarProveedor(String id, String nombre,String apellido,
             String email,String telefono,String idRubro, String password, 
-            String password2, Float honorarios, MultipartFile archivo) throws Exception{
+            String password2, Float honorarios,  String descripcionTrabajo, 
+            MultipartFile archivo) throws Exception{
        
        validar(nombre,apellido,email,telefono,password,password2,honorarios);
         Rubro rubro=servicioRubro.getOne(idRubro);
@@ -99,6 +102,7 @@ public class ServicioProveedor {
            proveedor.setPassword(new BCryptPasswordEncoder().encode(password));
            proveedor.setRol(Rol.PROVEEDOR);
            proveedor.setHonorarios(honorarios);
+           proveedor.setDescripcionTrabajo(descripcionTrabajo);
            
            proveedorRepositorio.save(proveedor);
        }

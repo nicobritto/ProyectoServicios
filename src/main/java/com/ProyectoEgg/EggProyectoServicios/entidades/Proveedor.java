@@ -26,19 +26,23 @@ public class Proveedor extends Persona{
     
     private Float honorarios;
     
+    private String descripcionTrabajo;
+    
     public Proveedor(){
     }
 
-    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios) {
+    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String descripcionTrabajo) {
         this.telefono = telefono;
         this.rubro = rubro;
         this.calificacion = calificacion;
         this.trabajos = trabajos;
         this.imagen = imagen;
         this.honorarios = honorarios;
+        this.descripcionTrabajo = descripcionTrabajo;
     }
 
-    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String id, String nombre, String apellido, String email, String password, Rol rol) {
+
+    public Proveedor(String telefono, Rubro rubro, Float calificacion, List<Trabajo> trabajos, Imagen imagen, Float honorarios, String id, String nombre, String apellido, String email, String password, Rol rol, String descripcionTrabajo) {
         super(id, nombre, apellido, email, password, rol);
         this.telefono = telefono;
         this.rubro = rubro;
@@ -46,7 +50,7 @@ public class Proveedor extends Persona{
         this.trabajos = trabajos;
         this.imagen = imagen;
         this.honorarios = honorarios;
-        
+        this.descripcionTrabajo = descripcionTrabajo;
        
     }
   
@@ -98,6 +102,14 @@ public class Proveedor extends Persona{
 
     public void setHonorarios(Float honorarios) {
         this.honorarios = honorarios;
+    }
+
+    public String getDescripcionTrabajo() {
+        return descripcionTrabajo;
+    }
+
+    public void setDescripcionTrabajo(String descripcionTrabajo) {
+        this.descripcionTrabajo = descripcionTrabajo;
     }
 
     
