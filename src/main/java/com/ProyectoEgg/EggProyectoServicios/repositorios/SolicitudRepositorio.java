@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface SolicitudRepositorio extends JpaRepository<Solicitud, String>{
     
     
-    @Query("SELECT s FROM Solicitud s WHERE s.proveedor.id = :id AND s.estado IS TRUE")
+    @Query("SELECT s FROM Solicitud s WHERE s.proveedor.id = :id AND s.estado IS 1")
     public  List<Solicitud> buscarSolicitud(@Param("id") String id);
     
 }

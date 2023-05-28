@@ -3,18 +3,30 @@
     <head th:replace="/fragments/head :: head"> </head>
     <body>
 
-        <div class="container">
+        <div class="row justify-content-center" style="text-align: left">
+            <div class="col col-6">
+
+                <p><img class="logo"  th:src="@{/imagen/perfil/__${proveedor.id}__}" ></p>
+                <p>Nombre: <span th:text="${proveedor.nombre}"></p>
+                <p>Apellido: <span th:text="${proveedor.apellido}"></p>
+                <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></p>
+                <p th:if="${session.usuariosession != null}">Teléfono: <span th:text="${proveedor.telefono}"></p>
+                <p th:if="${session.usuariosession != null}">Email:  <span th:text="${proveedor.email}"></p>
+                <p>Descripción del servicio: <span th:text="${proveedor.descripcionTrabajo}"></p>
+                <p th:if="${session.usuariosession != null}">Precio del servicio por hora:  $<span th:text="${proveedor.honorarios}"></p>
+                <p>Calificación:  <span th:text="${proveedor.calificacion}"></p>
+
+
+                <form class="formulario" th:action= "@{/solicitud/__${proveedor.id}__}" method="POST" sec:authorize="hasRole('USER')">
+                    <input hidden th:value="${id}" name="id">
+                    <input class="btn btn-primary" type="submit" value="Contratar">
+                </form>
+            </div>
+
+           
+                <a class="btn btn-primary" th:href="@{/proveedores}" role="button">Volver</a>
             
-            <p><img class="logo"  th:src="@{/imagen/perfil/__${proveedor.id}__}" ></p>
-            <p>Nombre: <span th:text="${proveedor.nombre}"></p>
-            <p>Apellido: <span th:text="${proveedor.apellido}"></p>
-            <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></p>
-            <p sec:authorize="hasRole('ADMIN,PROVEEDOR,USER')">Teléfono: <span th:text="${proveedor.telefono}"></p>
-            <p sec:authorize="hasRole('ADMIN,PROVEEDOR,USER')">Email:  <span th:text="${proveedor.email}"></p>
-            <p>Calificación:  <span th:text="${proveedor.calificacion}"></p>
-            <p sec:authorize="hasRole('ADMIN,PROVEEDOR,USER')">Precio del servicio por hora:  $<span th:text="${proveedor.honorarios}"></p>
+            
         </div>
-        <input class="btn btn-primary" type="submit" value="Contratar">
-        <a class="btn btn-primary" th:href="@{/proveedores}" role="button">Volver</a>
     </body>
 </html>

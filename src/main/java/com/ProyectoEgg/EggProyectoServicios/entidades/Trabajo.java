@@ -26,15 +26,19 @@ public class Trabajo {
     private Proveedor proveedor;
     
     @OneToOne
+    private Usuario usuario;
+    
+    @OneToOne
     private Voto voto;
 
     public Trabajo() {
     }
 
-    public Trabajo(String id, Estado estado, Proveedor proveedor, Voto voto) {
+    public Trabajo(String id, Estado estado, Proveedor proveedor, Usuario usuario, Voto voto) {
         this.id = id;
         this.estado = estado;
         this.proveedor = proveedor;
+        this.usuario = usuario;
         this.voto = voto;
     }
 
@@ -68,6 +72,14 @@ public class Trabajo {
 
     public void setVoto(Voto voto) {
         this.voto = voto;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
     

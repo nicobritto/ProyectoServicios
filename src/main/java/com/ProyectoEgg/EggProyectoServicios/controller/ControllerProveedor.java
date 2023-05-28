@@ -24,85 +24,86 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
 @Controller
 @RequestMapping("/")
 public class ControllerProveedor {
-    
+
     @Autowired
     private ServicioProveedor servicioProveedor;
     @Autowired
     private ServicioRubro servicioRubro;
-    
+
     @Autowired
     private ServicioSolicitud servicioSolicitud;
-    
+
     @Autowired
     private TrabajoServicio servicioTrabajo;
     
+
     @GetMapping("/registrar")
     public String registrar(ModelMap model) {
         List<Rubro> rubros = servicioRubro.listarRubros();
         model.addAttribute("rubros", rubros);
         return "proveedorForm.html";
     }
-        
+
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre,@RequestParam String apellido,
-            @RequestParam String email,@RequestParam String telefono,@RequestParam(required = false) String idRubro, 
-            @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Float honorarios,
-            MultipartFile archivo,ModelMap modelo){
+    public String registro(@RequestParam String nombre, @RequestParam String apellido,
+            @RequestParam String email, @RequestParam String telefono, @RequestParam(required = false) String idRubro,
+            @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Float honorarios, 
+            @RequestParam(required = false) String descripcionTrabajo, MultipartFile archivo, ModelMap modelo) {
         try {
-            servicioProveedor.crearProveedor(nombre,apellido,email,telefono,idRubro, 
-                    password, password2, honorarios, archivo);
-            modelo.put("exito","Se registró correctamente!");
-            return "index.html";
-        }catch (Exception e) {
+            servicioProveedor.crearProveedor(nombre, apellido, email, telefono, idRubro,
+                    password, password2, honorarios, descripcionTrabajo, archivo);
+            modelo.put("exito", "Se registró correctamente!");
+            return "login.html";
+        } catch (Exception e) {
             modelo.put("error", e.getMessage());
             return "proveedorForm.html";
         }
     }
-    
+
     @GetMapping("/proveedores")
-    public String mostrarTodos(ModelMap modelo){
+    public String mostrarTodos(ModelMap modelo) {
         List<Proveedor> proveedores = servicioProveedor.listarTodos();
-        
+
         modelo.addAttribute("proveedores", proveedores);
-      
+
         return "servicios_todos.html";
     }
-           //ok hasta aca
+    //ok hasta aca
+
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, ModelMap modelo){
-         List<Rubro> rubros = servicioRubro.listarRubros();
+    public String modificar(@PathVariable String id, ModelMap modelo) {
+        List<Rubro> rubros = servicioRubro.listarRubros();
         modelo.addAttribute("rubros", rubros);
         modelo.put("proveedor", servicioProveedor.getOne(id));
-        
+
         return "proveedorModificar.html";
     }
-    
+
     @PostMapping("/modificar/{id}")
     public String actualizacion(@PathVariable String id, @RequestParam String nombre,
-            @RequestParam String apellido,@RequestParam String email,
-            @RequestParam String telefono,@RequestParam(required = false)String idRubro,
+            @RequestParam String apellido, @RequestParam String email,
+            @RequestParam String telefono, @RequestParam(required = false) String idRubro,
             @RequestParam String password, @RequestParam String password2,
-            @RequestParam(required = false)Float honorarios, MultipartFile archivo,ModelMap modelo){
+            @RequestParam(required = false) Float honorarios, 
+            @RequestParam(required = false) String descripcionTrabajo, MultipartFile archivo, ModelMap modelo) {
         try {
-            servicioProveedor.modificarProveedor(id, nombre,apellido,email,telefono,
-                    idRubro, password, password2, honorarios, archivo);
-            modelo.put("exito","Proveedor modificado con exito!");
+            servicioProveedor.modificarProveedor(id, nombre, apellido, email, telefono,
+                    idRubro, password, password2, honorarios, descripcionTrabajo, archivo);
+            modelo.put("exito", "Proveedor modificado con exito!");
             return "index.html";
-        }catch (Exception e) {
-             List<Rubro> rubros = servicioRubro.listarRubros();
-             modelo.put("id",id);
-             modelo.addAttribute("rubros", rubros);
-             modelo.put("proveedor", servicioProveedor.getOne(id));
-             modelo.put("error", e.getMessage());
-        return "proveedorModificar.html";
+        } catch (Exception e) {
+            List<Rubro> rubros = servicioRubro.listarRubros();
+            modelo.put("id", id);
+            modelo.addAttribute("rubros", rubros);
+            modelo.put("proveedor", servicioProveedor.getOne(id));
+            modelo.put("error", e.getMessage());
+            return "proveedorModificar.html";
         }
     }
-    
+
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable String id, ModelMap model) {
 
@@ -110,79 +111,97 @@ public class ControllerProveedor {
             servicioProveedor.eliminar(id);
             return "redirect:../proveedores";
         } catch (Exception ex) {
-            //Logger.getLogger(EditorialControlador.class.getName()).log(Level.SEVERE, null, ex);
+            
             model.put("error", ex.getMessage());
             return "redirect:../proveedores";
         }
     }
-    
+
     @GetMapping("/buscarPorRubro/{nombre}")
-    public String mostrarXrubro(ModelMap modelo , @PathVariable String nombre){
+    public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
-        
+
         modelo.addAttribute("proveedores", proveedores);
-      
-            return "serviciosPorRubro.html";
-        
+
+        return "serviciosPorRubro.html";
+
     }
 
     @GetMapping("/masInfo/{id}")
-    public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo){
-        
+    public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo) {
+
         modelo.put("proveedor", servicioProveedor.getOne(id));
-        
+
         return "masInfoProveedor.html";
     }
-    
+
     @GetMapping("/notificaciones")
-    public String mostrarNotificaciones(ModelMap modelo, HttpSession session){
+    public String mostrarNotificaciones(ModelMap modelo, HttpSession session) {
+
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+
+        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+
+        modelo.put("solicitudes", solicitudes);
+
+        return "notificaciones.html";
+    }
+
+   
+    @PostMapping("/solicitud/{id}")
+    public String crearSolicitud(@PathVariable String id, HttpSession session, ModelMap modelo) {
+
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+
+        modelo.put("proveedor", servicioProveedor.getOne(id));
+
+        Solicitud solicitud = servicioSolicitud.crearSolicitud(logeado.getId(), id);
+
+        modelo.put("solicitud", solicitud);
+
+        return "index.html";
+    }
+    
+    @PostMapping("/trabajo/{id}")
+    public String crearTrabajo(HttpSession session, ModelMap modelo, @RequestParam String estado, 
+            @PathVariable String id) {
+
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+
+        Solicitud solicitud = servicioSolicitud.getOne(id);
+        
+        Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado), solicitud.getUsuario().getId());
+        
+        servicioSolicitud.modificarEstado(id, Boolean.FALSE);
+
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+        
+        modelo.put("trabajos", trabajos);
+        
+        return "trabajosAceptados.html";
+    }
+    
+    @GetMapping("/aceptados")
+    public String listaTrabajosAceptados(HttpSession session, ModelMap modelo){
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+        
+        modelo.put("trabajos", trabajos);
+        
+        return "trabajosAceptados.html";
+        
+    }
+    
+    @PostMapping("/aceptados/{id}")
+    public String listaTrabajos(HttpSession session, ModelMap modelo, @RequestParam String estado, 
+            @PathVariable String id) {
 
         Persona logeado = (Persona) session.getAttribute("usuariosession");
         
-        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
-       
-        try {
-            // buenas tati mañana no voy a estar me parece asi q te dejo esto nose si te va funcionar 
-            // borra todo este kilombo de comentarios cuando lo veas cuando hice el merge se borro el boton 
-            //de notificaciones ese era conflicto
-            
-            // CREO que anda no estoy seguro pero como no tiene nada setiado no muestra nada setiado en el estado no muestra nada
-           // Trabajo trabajo=servicioTrabajo.buscarTrabajoPorIdProvedoor(logeado.getId());
-           
-           // este anda porque le setie el estado la que se me ocurre es poner la lista de abajo
-           Trabajo trabajo=new Trabajo();
-            trabajo.setEstado(Estado.ACEPTADO);
-            // una lista desordenada con los tres valores y que seleccione el q quiera 
-           /*
-               <select name="estado">
-                    <option value="ACEPTADO">ACEPTADO</option>
-                    <option value="RECHAZADO" selected>RECHAZADO</option>
-                    <option value="CONFIRMADO">CONFIRMADO</option>
-                </select>*/
-           
-            
-            modelo.put("trabajo", trabajo);
-        } catch (Exception ex) {
-            Logger.getLogger(ControllerProveedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        servicioTrabajo.modificarEstado(id, Estado.valueOf(estado));
         
-        modelo.put("solicitud", solicitudes);
-        
-        
-        return "notificaciones.html";
+        return "redirect:../aceptados";
     }
-    
-    //No funciona
-    @PostMapping("/trabajo")
-    public String crearTrabajo(HttpSession session, ModelMap modelo,@RequestParam String estado){
-        
-        Persona logeado = (Persona) session.getAttribute("usuariosession");
-        
-        
-        
-        Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado));
-        
-        return "notificaciones.html";
-    }
-    
 }
