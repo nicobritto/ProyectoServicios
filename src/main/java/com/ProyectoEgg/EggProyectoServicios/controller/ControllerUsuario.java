@@ -1,14 +1,20 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Persona;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Voto;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioUsuario;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioVoto;
+import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -16,8 +22,13 @@ public class ControllerUsuario {
 
     @Autowired
     private ServicioUsuario servicioUsuario;
+    
+    @Autowired
+    private TrabajoServicio servicioTrabajo;
 
-
+    @Autowired
+    private ServicioVoto votoServicio;
+    
     @GetMapping("/registrar")
     public String registrar(){
         return "usuarioForm.html";
@@ -74,6 +85,51 @@ public class ControllerUsuario {
         }
     }
 
+    @GetMapping("/contratados")
+    public String mostrarTrabajosContratados(ModelMap modelo, HttpSession session){
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXUsuario(logeado.getId());
+        
+        System.out.println(trabajos);
+        
+        modelo.put("trabajos", trabajos);
+        
+        return "trabajosContratadosUsuario.html";
+    }
 
-
+    @GetMapping("/calificacion/{id}")
+    public String calificarServicio(@PathVariable String id, ModelMap modelo, HttpSession session){
+        
+        Trabajo trabajo = servicioTrabajo.getOne(id);
+        
+        modelo.put("trabajo", trabajo);
+   
+        return "calificacion.html";
+    }
+    
+    @PostMapping("/calificado/{id}")
+    public String calificado(@RequestParam Integer puntaje,@RequestParam String resenia,
+           @PathVariable String id, ModelMap modelo, HttpSession session){
+        
+        Voto voto = votoServicio.crearVoto(puntaje, resenia, id);
+        
+        modelo.put("voto", voto);
+        
+        System.out.println(puntaje);
+        System.out.println(resenia);
+        System.out.println(id);
+        servicioTrabajo.modificarVoto(id, voto.getId());
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXUsuario(logeado.getId());
+        
+        System.out.println(trabajos);
+        
+        modelo.put("trabajos", trabajos);
+        
+        return "redirect:../contratados";
+    }
 }
