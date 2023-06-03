@@ -17,9 +17,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
                 <li><a class="dropdown-item"  th:href="@{/proveedores}">Todos</a></li>
-                <li><hr class="dropdown-divider"></li>
+                
                 <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/gasista}">Gasistas</a></li>
-                <li><hr class="dropdown-divider"></li>
+                
                 <li><a class="dropdown-item" name="nombre"  th:href="@{/buscarPorRubro/plomero}">Plomeros</a></li>
             </ul>
         </li>
@@ -31,7 +31,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
                 <li><a class="dropdown-item"   th:href="@{/rubro/registrarRubro}" >Agregar</a></li>
-                <li><hr class="dropdown-divider"></li>
+                
                 <li><a class="dropdown-item" name="nombre"  th:href="@{/rubro/listaRubros}">Listar</a></li>
 
             </ul>
@@ -44,7 +44,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
                 <li><a class="dropdown-item" th:href="@{/notificaciones}">Solicitudes</a></li>
-                <li><hr class="dropdown-divider"></li>
+               
                 <li><a class="dropdown-item" name="nombre"  th:href="@{/aceptados}">Aceptados</a></li>
 
             </ul>
@@ -54,7 +54,7 @@
     <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('USER')">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Trabajos solicitados
+                Servicios contratados
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
                 <li><a class="dropdown-item"   th:href="@{/usuarios/contratados}" >Ver todos</a></li>
@@ -68,10 +68,12 @@
                 Perfil
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                <li><a class="dropdown-item"   th:href="@{/masInfo/_${session.usuariosession.id}_}" sec:authorize="hasRole('PROVEEDOR')">Mi perfil</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item"   th:href="@{/modificar/_${session.usuariosession.id}_}" sec:authorize="hasRole('PROVEEDOR')">Modificar datos</a></li>
-                <li><hr class="dropdown-divider"></li>
+
+                <li><a class="dropdown-item"   th:href="@{/masInfo/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Mi perfil</a></li>
+                
+                <li><a class="dropdown-item"   th:href="@{/modificar/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Modificar datos</a></li>
+                
+
                 <li><a class="dropdown-item" name="nombre" href="/logout">Cerrar sesion</a></li>
 
             </ul>

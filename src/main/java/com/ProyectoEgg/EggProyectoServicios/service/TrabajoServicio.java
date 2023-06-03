@@ -107,12 +107,12 @@ public class TrabajoServicio {
             Trabajo trabajito=trabajo.get();
             return trabajito;
         }
-         throw new MiException("trabajo por id de proveedor no encotnradoasd");
+         throw new MiException("Trabajo no encontrado");
         
     }
     
     @Transactional
-    public void modificarVoto(String id, String idVoto){
+    public void agregarVotoEnTrabajo(String id, String idVoto){
         
         Optional<Trabajo> respuesta = trabajoRepositorio.findById(id);
         
@@ -133,4 +133,24 @@ public class TrabajoServicio {
         }
     }
     
+    @Transactional
+    public void modificarProveedorCalificacion(String id){
+        
+        List<Trabajo> trabajos = trabajoRepositorio.listarPorProveedorVoto(id);
+        
+        Integer cont = 0;
+        Float suma = 0.0f;
+        
+        for (Trabajo trabajo : trabajos) {
+            
+            suma = suma + trabajo.getVoto().getPuntaje();
+            cont++;
+        }
+        
+        Proveedor proveedor = servicioProveedor.getOne(id);
+  
+        proveedor.setCalificacion(suma/cont);
+        
+        proveedorRepositorio.save(proveedor);
+    }
 }
