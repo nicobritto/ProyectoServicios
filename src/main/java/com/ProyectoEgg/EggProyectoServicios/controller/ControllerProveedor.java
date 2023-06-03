@@ -11,8 +11,6 @@ import com.ProyectoEgg.EggProyectoServicios.service.ServicioRubro;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioSolicitud;
 import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
