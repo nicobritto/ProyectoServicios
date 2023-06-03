@@ -52,8 +52,7 @@ public class ServicioRubro {
      
     }
 
-    
-     //todavia no lo probe
+
      public List<Rubro> listarRubros() {
         List<Rubro> rubro = new ArrayList();
         rubro = rubroRepositorio.findAll();
