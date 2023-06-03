@@ -37,16 +37,16 @@ public class ControllerUsuario {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email,   @RequestParam String password, @RequestParam String password2, ModelMap modelo){
 
-    try{
+        try {
 
-        servicioUsuario.crearUsuario(nombre,apellido,email, password,  password2);
-        modelo.put("exito","usuario creado con exito");
-        return "index.html";
-        
-    }catch (Exception e){
-        modelo.put("error", e);
-        return "usuarioForm.html";
-    }
+            servicioUsuario.crearUsuario(nombre, apellido, email, password, password2);
+            modelo.put("exito", "usuario creado con exito");
+            return "index.html";
+
+        } catch (Exception e) {
+            modelo.put("error", e);
+            return "usuarioForm.html";
+        }
 
     }
 
@@ -111,8 +111,9 @@ public class ControllerUsuario {
     
     @PostMapping("/calificado/{id}")
     public String calificado(@RequestParam Integer puntaje,@RequestParam String resenia,
-           @PathVariable String id, ModelMap modelo, HttpSession session){
+           @PathVariable String id, ModelMap modelo, HttpSession session) throws Exception{
         
+        try{
         Voto voto = votoServicio.crearVoto(puntaje, resenia, id);
         
         modelo.put("voto", voto);
@@ -131,5 +132,10 @@ public class ControllerUsuario {
         modelo.put("trabajos", trabajos);
         
         return "redirect:../contratados";
+        } catch (Exception e) {
+            modelo.put("Error", e.getMessage());
+            
+            return "redirect:../contratados";
+        }
     }
 }

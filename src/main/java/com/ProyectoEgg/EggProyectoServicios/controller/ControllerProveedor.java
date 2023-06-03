@@ -121,7 +121,6 @@ public class ControllerProveedor {
         }
     }
     
-    //Hay que cambiar este controller
     @GetMapping("/buscarPorRubro")
     public String mostrarXrubro(ModelMap modelo , @RequestParam String nombre){
 
@@ -156,22 +155,29 @@ public class ControllerProveedor {
    
     @PostMapping("/solicitud/{id}")
     public String crearSolicitud(@PathVariable String id, HttpSession session, ModelMap modelo) {
+        try{
+            Persona logeado = (Persona) session.getAttribute("usuariosession");
 
-        Persona logeado = (Persona) session.getAttribute("usuariosession");
+            modelo.put("proveedor", servicioProveedor.getOne(id));
 
-        modelo.put("proveedor", servicioProveedor.getOne(id));
+            Solicitud solicitud = servicioSolicitud.crearSolicitud(logeado.getId(), id);
 
-        Solicitud solicitud = servicioSolicitud.crearSolicitud(logeado.getId(), id);
+            modelo.put("solicitud", solicitud);
 
-        modelo.put("solicitud", solicitud);
+            return "index.html";
+            
+        } catch (Exception ex) {   
 
-        return "index.html";
+            modelo.put("error", ex.getMessage());
+            
+            return "redirect:../notificaciones";
+        }
     }
     
     @PostMapping("/trabajo/{id}")
     public String crearTrabajo(HttpSession session, ModelMap modelo, @RequestParam String estado, 
             @PathVariable String id) {
-
+        try{
         Persona logeado = (Persona) session.getAttribute("usuariosession");
 
         Solicitud solicitud = servicioSolicitud.getOne(id);
@@ -185,6 +191,13 @@ public class ControllerProveedor {
         modelo.put("trabajos", trabajos);
         
         return "trabajosAceptados.html";
+        
+        } catch (Exception ex) {    
+            
+            modelo.put("error", ex.getMessage());
+            
+            return "redirect:../notificaciones";
+        }
     }
     
     @GetMapping("/aceptados")
@@ -203,11 +216,17 @@ public class ControllerProveedor {
     @PostMapping("/aceptados/{id}")
     public String listaTrabajos(HttpSession session, ModelMap modelo, @RequestParam String estado, 
             @PathVariable String id) {
-
+        try {
         Persona logeado = (Persona) session.getAttribute("usuariosession");
         
         servicioTrabajo.modificarEstado(id, Estado.valueOf(estado));
         
         return "redirect:../aceptados";
+        } catch (Exception ex) {  
+            
+            modelo.put("error", ex.getMessage());
+            
+            return "redirect:../aceptados";
+        }
     }
 }
