@@ -75,3 +75,10 @@
     display: inline;
 }
 
+.red-row {
+    background-color: #FEC3C3!important;
+        }
+        
+.green-row {
+    background-color: #C7FEC3!important;
+        }

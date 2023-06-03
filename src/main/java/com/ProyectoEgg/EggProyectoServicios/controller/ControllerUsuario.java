@@ -5,6 +5,8 @@ import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Voto;
+import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Estado;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioProveedor;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioUsuario;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioVoto;
 import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
@@ -28,6 +30,9 @@ public class ControllerUsuario {
 
     @Autowired
     private ServicioVoto votoServicio;
+    
+    @Autowired
+    private ServicioProveedor servicioProveedor;
     
     @GetMapping("/registrar")
     public String registrar(){
@@ -116,17 +121,32 @@ public class ControllerUsuario {
         Voto voto = votoServicio.crearVoto(puntaje, resenia, id);
         
         modelo.put("voto", voto);
+
+        servicioTrabajo.agregarVotoEnTrabajo(id, voto.getId());
         
-        System.out.println(puntaje);
-        System.out.println(resenia);
-        System.out.println(id);
-        servicioTrabajo.modificarVoto(id, voto.getId());
+        servicioTrabajo.modificarEstado(id, Estado.VOTADO);
         
         Persona logeado = (Persona) session.getAttribute("usuariosession");
         
         List<Trabajo> trabajos = servicioTrabajo.trabajosXUsuario(logeado.getId());
         
-        System.out.println(trabajos);
+        modelo.put("trabajos", trabajos);
+        
+        Trabajo trabajo = servicioTrabajo.getOne(id);
+        
+        servicioTrabajo.modificarProveedorCalificacion(trabajo.getProveedor().getId());
+        
+        return "redirect:../contratados";
+    }
+    
+    @GetMapping("/cancelado/{id}")
+    public String cancelarServicio(@PathVariable String id, ModelMap modelo, HttpSession session){
+        
+        servicioTrabajo.modificarEstado(id, Estado.CANCELADO);
+        
+        Persona logeado = (Persona) session.getAttribute("usuariosession");
+        
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXUsuario(logeado.getId());
         
         modelo.put("trabajos", trabajos);
         
