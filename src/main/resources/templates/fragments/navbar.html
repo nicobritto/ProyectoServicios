@@ -68,10 +68,12 @@
                 Perfil
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
+
                 <li><a class="dropdown-item"   th:href="@{/masInfo/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Mi perfil</a></li>
                 
                 <li><a class="dropdown-item"   th:href="@{/modificar/__${session.usuariosession.id}__}" sec:authorize="hasRole('PROVEEDOR')">Modificar datos</a></li>
                 
+
                 <li><a class="dropdown-item" name="nombre" href="/logout">Cerrar sesion</a></li>
 
             </ul>

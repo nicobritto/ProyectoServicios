@@ -54,9 +54,10 @@ public class ControllerProveedor {
             servicioProveedor.crearProveedor(nombre, apellido, email, telefono, idRubro,
                     password, password2, honorarios, descripcionTrabajo, archivo);
             modelo.put("exito", "Se registró correctamente!");
-            return "login.html";
+            return "loginUsuario.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+            
             return "proveedorForm.html";
         }
     }
@@ -120,9 +121,8 @@ public class ControllerProveedor {
     }
     
     //Hay que cambiar este controller
-    @GetMapping("/buscarPorRubro")
-    public String mostrarXrubro(ModelMap modelo , @RequestParam String nombre){
-
+   @GetMapping("/buscarPorRubro/{nombre}")
+    public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
         modelo.addAttribute("proveedores", proveedores);

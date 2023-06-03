@@ -4,22 +4,22 @@
     <body>
         <section class="form-register with-background">
             <form class="formulario" th:action= "@{/administrador/registro}" method="POST" enctype="multipart/form-data">
-                <h4>Formulario Registro</h4>
+                <h4>Formulario Registro Administrador</h4>
                 <input class="controls" type="text" name="nombre" placeholder="Nombre" th:value="${nombre}">
                 <input class="controls" type="text" name="apellido"  placeholder="Apellido" th:value="${apellido}">
                 <input class="controls" type="text" name="email"  placeholder="Email" th:value="${email}">
-                <input class="controls" type="number" name="telefeno"  placeholder="Telefono" th:value="${telefono}" >
+                
                 <input class="controls" type="password" name="password"  placeholder="Contraseña"  th:value="${password}">
-                <input class="controls" type="password" name="password"  placeholder="Repetir Contraseña" th:value="${password2}">
-                <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-
+                <input class="controls" type="password" name="password2"  placeholder="Repetir Contraseña" th:value="${password2}">
+                <p>Estoy de acuerdo con los <a href="#">Terminos y Condiciones</a></p>
                 <p><a href="#">¿Ya tengo Cuenta?</a></p>
+                <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+            </div>
             </form>
 
 
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-            </div>
+           
             <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
                 <div class="card-body">
                     <h5 class="card-title">Error!!!!</h5>
