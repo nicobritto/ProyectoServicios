@@ -32,7 +32,7 @@ public class ServicioProveedor {
             String telefono,String idRubro, String password, String password2, 
             Float honorarios, String descripcionTrabajo, MultipartFile archivo ) throws Exception  {
         
-        validar(nombre,apellido,email,telefono,password,password2,honorarios);
+        validar(nombre,apellido,email,telefono,password,password2,honorarios,descripcionTrabajo,archivo);
         
         List<Trabajo> trabajos=null;
         Rubro rubro=servicioRubro.getOne(idRubro);
@@ -73,7 +73,7 @@ public class ServicioProveedor {
             String password2, Float honorarios,  String descripcionTrabajo, 
             MultipartFile archivo) throws Exception{
        
-       validar(nombre,apellido,email,telefono,password,password2,honorarios);
+       validar(nombre,apellido,email,telefono,password,password2,honorarios,descripcionTrabajo,archivo);
         Rubro rubro=servicioRubro.getOne(idRubro);
        Optional<Proveedor> respuesta = proveedorRepositorio.findById(id);
        
@@ -131,7 +131,8 @@ public class ServicioProveedor {
     }
 
     
-    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2,Float honorarios) throws MiException {
+    public void validar(String nombre,String apellido,String email,String telefono,String password, String password2,Float honorarios, String descripcionTrabajo, 
+            MultipartFile archivo) throws MiException {
       
         if (nombre.trim().isEmpty()) {
             throw new MiException("Nombre no puede ser nulo");
@@ -153,9 +154,15 @@ public class ServicioProveedor {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
          if ( honorarios==null || honorarios<1 ) {
-            throw new MiException(" honorarios no puede estar vacía, y debe tener más de 5 dígitos");
+            throw new MiException("Honorarios no puede estar vacía");
         }
-       
+        if (descripcionTrabajo.trim().isEmpty()) {
+            throw new MiException("Ingrese una descripción del trabajo");
+        }
+        if (archivo == null) {
+            throw new MiException("Ingrese un archivo");
+        }
+         
          
           }
 

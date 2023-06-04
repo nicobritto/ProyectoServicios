@@ -16,10 +16,12 @@ public class ServicioVoto {
     @Autowired
     private TrabajoServicio trabajoServicio;
     
-    @Autowired
-    private ServicioProveedor servicioProveedor;
-    
-    public Voto crearVoto(Integer puntaje, String resenia, String idTrabajo){
+
+    public Voto crearVoto(Integer puntaje, String resenia, String idTrabajo) throws Exception{
+        validar(puntaje,resenia);
+
+  
+
         
         Voto voto = new Voto();
         
@@ -33,6 +35,15 @@ public class ServicioVoto {
         
         return votoRepositorio.save(voto);
 
+    }
+    
+    public void validar(Integer puntaje, String resenia) throws Exception {
+        if (puntaje == null || puntaje > 5 || puntaje < 1) {
+            throw new Exception("El puntaje no puede estar vacío y debe ser un número entre 1 y 5");
+        } 
+        if (resenia.trim().isEmpty()) {
+            throw new Exception("Reseña no puede estar vacía");
+        }
     }
     
     
