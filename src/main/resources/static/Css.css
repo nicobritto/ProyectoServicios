@@ -75,6 +75,15 @@
     display: inline;
 }
 
+
+.red-row {
+    background-color: #FEC3C3!important;
+        }
+        
+.green-row {
+    background-color: #C7FEC3!important;
+        }
+
 .form-register {
     width: 400px;
     background: #24303c;
@@ -140,38 +149,6 @@ body {
 
 
 
-/* Esto es para modificar servicios_todos.html */
-
-.form-register h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.form-registerService {
-    width: 400px;
-    background: #24303c;
-    padding: 30px;
-    margin: auto;
-    margin-top: 100px;
-    border-radius: 4px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 13px 37px #000;
-}
-
-.wide-select {
-    width: 85%;
-    /* o puedes especificar un ancho máximo */
-    /* max-width: 400px; */
-}
-
-.rubro-label {
-    margin-right: 10px;
-}
-
-.buscar-button {
-    margin-left: 10px;
-}
 
 
 /*Modificaciones login usuario html*/
@@ -300,4 +277,5 @@ body {
   width: 300px; /* Ajusta el ancho deseado */
   margin-bottom: 0px; /* Ajusta el margen inferior deseado */
 }
+
 

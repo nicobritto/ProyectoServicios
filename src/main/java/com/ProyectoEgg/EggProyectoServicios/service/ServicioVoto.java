@@ -1,5 +1,6 @@
 package com.ProyectoEgg.EggProyectoServicios.service;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Voto;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.VotoRepositorio;
@@ -15,8 +16,12 @@ public class ServicioVoto {
     @Autowired
     private TrabajoServicio trabajoServicio;
     
+
     public Voto crearVoto(Integer puntaje, String resenia, String idTrabajo) throws Exception{
         validar(puntaje,resenia);
+
+  
+
         
         Voto voto = new Voto();
         
@@ -26,6 +31,7 @@ public class ServicioVoto {
         voto.setReseña(resenia);
         voto.setTrabajo(trabajo);
         voto.setUsuario(null);
+  
         
         return votoRepositorio.save(voto);
 

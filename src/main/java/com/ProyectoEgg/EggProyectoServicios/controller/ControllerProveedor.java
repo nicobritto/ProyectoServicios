@@ -11,8 +11,6 @@ import com.ProyectoEgg.EggProyectoServicios.service.ServicioRubro;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioSolicitud;
 import com.ProyectoEgg.EggProyectoServicios.service.TrabajoServicio;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +54,10 @@ public class ControllerProveedor {
             servicioProveedor.crearProveedor(nombre, apellido, email, telefono, idRubro,
                     password, password2, honorarios, descripcionTrabajo, archivo);
             modelo.put("exito", "Se registró correctamente!");
-            return "login.html";
+            return "loginUsuario.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+            
             return "proveedorForm.html";
         }
     }
@@ -121,8 +120,9 @@ public class ControllerProveedor {
         }
     }
     
-    @GetMapping("/buscarPorRubro")
-    public String mostrarXrubro(ModelMap modelo , @RequestParam String nombre){
+
+   @GetMapping("/buscarPorRubro/{nombre}")
+    public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
 
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
