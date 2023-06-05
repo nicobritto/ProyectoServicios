@@ -153,4 +153,11 @@ public class TrabajoServicio {
         
         proveedorRepositorio.save(proveedor);
     }
+    
+    public List<Trabajo> trabajosXProveedorConVoto(String idProveedor){
+        
+        List<Trabajo> trabajos = trabajoRepositorio.listarPorProveedorVoto(idProveedor);
+        
+        return trabajos;
+    }
 }

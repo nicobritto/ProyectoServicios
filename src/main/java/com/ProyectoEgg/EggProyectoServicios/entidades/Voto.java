@@ -16,7 +16,7 @@ public class Voto {
     
     private Integer puntaje;
     
-    private String reseña;
+    private String resenia;
     
     @OneToOne
     private Usuario usuario;
@@ -27,10 +27,10 @@ public class Voto {
     public Voto() {
     }
 
-    public Voto(String id, Integer puntaje, String reseña, Usuario usuario, Trabajo trabajo) {
+    public Voto(String id, Integer puntaje, String resenia, Usuario usuario, Trabajo trabajo) {
         this.id = id;
         this.puntaje = puntaje;
-        this.reseña = reseña;
+        this.resenia = resenia;
         this.usuario = usuario;
         this.trabajo = trabajo;
     }
@@ -51,12 +51,12 @@ public class Voto {
         this.puntaje = puntaje;
     }
 
-    public String getReseña() {
-        return reseña;
+    public String getResenia() {
+        return resenia;
     }
 
-    public void setReseña(String reseña) {
-        this.reseña = reseña;
+    public void setResenia(String resenia) {
+        this.resenia = resenia;
     }
 
     public Usuario getUsuario() {

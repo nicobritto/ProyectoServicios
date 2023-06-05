@@ -139,8 +139,14 @@ public class ControllerProveedor {
     @GetMapping("/masInfo/{id}")
     public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo) {
 
-        modelo.put("proveedor", servicioProveedor.getOne(id));
-
+        Proveedor proveedor = servicioProveedor.getOne(id);
+        
+        modelo.put("proveedor", proveedor);
+ 
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedorConVoto(id);
+        
+        modelo.put("trabajos", trabajos);
+        
         return "masInfoProveedor.html";
     }
 
@@ -233,4 +239,5 @@ public class ControllerProveedor {
             return "redirect:../notificaciones";
         }
     }
+    
 }

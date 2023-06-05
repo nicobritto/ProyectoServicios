@@ -8,22 +8,28 @@
                 <input class="controls" type="text" name="nombre" placeholder="Nombre" th:value="${nombre}">
                 <input class="controls" type="text" name="apellido"  placeholder="Apellido" th:value="${apellido}">
                 <input class="controls" type="text" name="email"  placeholder="Email" th:value="${email}">
-                
+
                 <input class="controls" type="password" name="password"  placeholder="Contraseña"  th:value="${password}">
                 <input class="controls" type="password" name="password2"  placeholder="Repetir Contraseña" th:value="${password2}">
                 <p>Estoy de acuerdo con los <a href="#">Terminos y Condiciones</a></p>
-                <p><a href="#">¿Ya tengo Cuenta?</a></p>
+                <p><a href="/login">Ya tengo Cuenta</a></p>
                 <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
-            </div>
+                    <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+                </div>
             </form>
 
 
-           
+
             <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
                 <div class="card-body">
                     <h5 class="card-title">Error!!!!</h5>
                     <p class="card-text" th:text="${error}"> </p>
+                </div>
+            </div>
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
                 </div>
             </div>
         </section>

@@ -1,7 +1,6 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
 import com.ProyectoEgg.EggProyectoServicios.entidades.Persona;
-import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Voto;
@@ -63,6 +62,14 @@ public class ControllerUsuario {
         return "usuarios_todos.html";
     }
 
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo) {
+        
+        modelo.put("usuario", servicioUsuario.getOne(id));
+
+        return "usuarioModificar.html";
+    }
+    
     @PostMapping("/modificar/{id}")
     public String actualizacion(@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido,
                                 @RequestParam String email, @RequestParam String password, String password2, ModelMap modelo){
@@ -137,9 +144,13 @@ public class ControllerUsuario {
         
         servicioTrabajo.modificarProveedorCalificacion(trabajo.getProveedor().getId());
         
+        modelo.put("exito", "Votación realizada correctamente!");
+        
         return "redirect:../contratados";
+        
         } catch (Exception e) {
-            modelo.put("Error", e.getMessage());
+            
+            modelo.put("error", "Lo sentimos, no pudiste realizar la votación");
             
             return "redirect:../contratados";
         }
