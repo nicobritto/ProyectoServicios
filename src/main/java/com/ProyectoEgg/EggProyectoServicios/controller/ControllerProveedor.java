@@ -127,6 +127,10 @@ public class ControllerProveedor {
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
         modelo.addAttribute("proveedores", proveedores);
+        
+        List<Rubro> rubros = servicioRubro.listarRubros();
+        
+        modelo.addAttribute("rubros", rubros);
 
         return "serviciosPorRubro.html";
 
@@ -148,6 +152,10 @@ public class ControllerProveedor {
         List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
 
         modelo.put("solicitudes", solicitudes);
+        
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+        
+        modelo.put("trabajos", trabajos);
 
         return "notificaciones.html";
     }
@@ -190,7 +198,7 @@ public class ControllerProveedor {
         
         modelo.put("trabajos", trabajos);
         
-        return "trabajosAceptados.html";
+        return "redirect:../notificaciones";
         
         } catch (Exception ex) {    
             
@@ -200,18 +208,6 @@ public class ControllerProveedor {
         }
     }
     
-    @GetMapping("/aceptados")
-    public String listaTrabajosAceptados(HttpSession session, ModelMap modelo){
-        
-        Persona logeado = (Persona) session.getAttribute("usuariosession");
-        
-        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
-        
-        modelo.put("trabajos", trabajos);
-        
-        return "trabajosAceptados.html";
-        
-    }
     
     @PostMapping("/aceptados/{id}")
     public String listaTrabajos(HttpSession session, ModelMap modelo, @RequestParam String estado, 
@@ -220,13 +216,21 @@ public class ControllerProveedor {
         Persona logeado = (Persona) session.getAttribute("usuariosession");
         
         servicioTrabajo.modificarEstado(id, Estado.valueOf(estado));
+
+        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+
+        modelo.put("solicitudes", solicitudes);
         
-        return "redirect:../aceptados";
+        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+        
+        modelo.put("trabajos", trabajos);
+        
+        return "redirect:../notificaciones";
         } catch (Exception ex) {  
             
             modelo.put("error", ex.getMessage());
             
-            return "redirect:../aceptados";
+            return "redirect:../notificaciones";
         }
     }
 }
