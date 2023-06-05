@@ -3,28 +3,10 @@
     <head th:replace="/fragments/head :: head"> </head>
     <body>
         <nav th:replace="/fragments/navbar :: nav"></nav>
-
-        <!--<div class="container" th:each="solicitud : ${solicitudes}">
-
-            <p>Nombre: <span th:text="${solicitud.usuario.nombre}"></p>
-            <p>Apellido: <span th:text="${solicitud.usuario.apellido}"></p>
-            <p>Email:  <span th:text="${solicitud.usuario.email}"></p>
-
-            <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
-                <input hidden th:value="${id}" name="id">
-                <input class="btn btn-primary" type="submit" value="Aceptar">
-                <input hidden value="ACEPTADO" name="estado">
-            </form>
-            <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
-                <input hidden th:value="${id}" name="id">
-                <input class="btn btn-primary" type="submit" value="Rechazar">
-                <input hidden value="RECHAZADO" name="estado">
-            </form>
-        </div>-->
-
+        
         <div class="row justify-content-center" style="text-align: center">
             <div class="col col-4" th:if="${solicitudes.isEmpty()}">
-                <h3>No tiene nuevas solicitudes</h3>
+                <h3 style="color: red">No tiene nuevas solicitudes</h3>
             </div>
             <div class="col col-10" th:if="${!solicitudes.isEmpty()}">
                 <div class="col col-4">

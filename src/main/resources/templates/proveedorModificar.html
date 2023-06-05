@@ -4,20 +4,20 @@
     <body>
         <section class="form-register with-background">
             <form class="formulario" th:action= "@{/modificar/__${proveedor.id}__}" method="POST" enctype="multipart/form-data">
-                <h4>Formulario Registro</h4>
-                <input class="controls" type="text" name="nombre" placeholder="Nombre" th:value="${nombre}">
-                <input class="controls" type="text" name="apellido"  placeholder="Apellido" th:value="${apellido}">
-                <input class="controls" type="text" name="email"  placeholder="Email" th:value="${email}">
-                <input class="controls" type="number" name="telefono"  placeholder="Telefono" th:value="${telefono}" >
+                <h4>Modifique sus datos</h4>
+                <input class="controls" type="text" name="nombre" placeholder="Nombre" th:value="${proveedor.nombre}">
+                <input class="controls" type="text" name="apellido"  placeholder="Apellido" th:value="${proveedor.apellido}">
+                <input class="controls" type="text" name="email"  placeholder="Email" th:value="${proveedor.email}">
+                <input class="controls" type="number" name="telefono"  placeholder="Telefono" th:value="${proveedor.telefono}" >
                 <input class="controls" type="password" name="password"  placeholder="Contraseña"  th:value="${password}">
                 <input class="controls" type="password" name="password2"  placeholder="Repetir Contraseña" th:value="${password2}">
                 <div class="input-group">
-                    <span class="input-group-text">Describa los servicios que ofrece:</span>
-                    <textarea class="form-control" aria-label="With textarea" name="descripcionTrabajo" th:value="${descripcionTrabajo}"></textarea>
+                    <span class="input-group-text">Servicios que ofrece:</span>
+                    <textarea class="form-control" aria-label="With textarea" name="descripcionTrabajo" th:value="${proveedor.descripcionTrabajo}" th:text="${proveedor.descripcionTrabajo}"></textarea>
                 </div>
                 <div class="form-group my-3">
-                    <label class="mb-2">Honorarios ($ por hora)</label> 
-                    <input type="number"  class="form-control" name="honorarios" th:value="${honorarios}">
+                    <label class="mb-2">Honorarios($ por hora)</label> 
+                    <input type="number"  class="form-control" name="honorarios" th:value="${proveedor.honorarios}">
                 </div>
                 <div >
                     <select name="idRubro">
@@ -32,16 +32,22 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3 botones">Modificar</button>
-                <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">Cancelar</a>
+                <a class="btn btn-primary mt-3 botones" th:href="@{/}" role="button">Cancelar</a>
                 <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-
-                <p><a href="#">¿Ya tengo Cuenta?</a></p>
+                
+                <p><a href="/login">Ya tengo Cuenta</a></p>
 
             </form>
             <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
                 <div class="card-body">
                     <h5 class="card-title">Error!!!!</h5>
                     <p class="card-text" th:text="${error}"> </p>
+                </div>
+            </div>
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
                 </div>
             </div>
         </section>

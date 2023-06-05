@@ -1,9 +1,11 @@
 package com.ProyectoEgg.EggProyectoServicios.service;
 
 import com.ProyectoEgg.EggProyectoServicios.entidades.Administrador;
+import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
 import com.ProyectoEgg.EggProyectoServicios.enumeraciones.Rol;
 import com.ProyectoEgg.EggProyectoServicios.excepciones.MiException;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.AdministradorRepositorio;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,29 @@ public class ServicioAdministrador {
         adminRepositorio.save(admin);
         
     }
+    
+    public Administrador getOne(String id){
+        
+        return adminRepositorio.getOne(id);
+    }
+    
+    public void modificarAdmin(String id, String nombre, String apellido,String email, String password, String password2) throws Exception{
+        validar( nombre, apellido,  email,  password, password2);
+        Optional<Administrador> respuesta= adminRepositorio.findById(id);
+
+        if(respuesta.isPresent()){
+            Administrador admin = respuesta.get();
+
+            admin.setNombre(nombre);
+            admin.setApellido(apellido);
+            admin.setEmail(email);
+            admin.setPassword(new BCryptPasswordEncoder().encode(password));
+
+
+            adminRepositorio.save(admin);
+        }
+    }
+    
     public void validar(String nombre,String apellido,String email,String password, String password2) throws MiException {
       
         if (nombre.trim().isEmpty()) {

@@ -1,9 +1,9 @@
 package com.ProyectoEgg.EggProyectoServicios.service;
 
-import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Trabajo;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Voto;
 import com.ProyectoEgg.EggProyectoServicios.repositorios.VotoRepositorio;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,7 @@ public class ServicioVoto {
     private TrabajoServicio trabajoServicio;
     
 
+    @Transactional
     public Voto crearVoto(Integer puntaje, String resenia, String idTrabajo) throws Exception{
         validar(puntaje,resenia);
 
@@ -28,7 +29,7 @@ public class ServicioVoto {
         Trabajo trabajo = trabajoServicio.getOne(idTrabajo);
         
         voto.setPuntaje(puntaje);
-        voto.setReseña(resenia);
+        voto.setResenia(resenia);
         voto.setTrabajo(trabajo);
         voto.setUsuario(null);
   
@@ -36,6 +37,8 @@ public class ServicioVoto {
         return votoRepositorio.save(voto);
 
     }
+    
+    
     
     public void validar(Integer puntaje, String resenia) throws Exception {
         if (puntaje == null || puntaje > 5 || puntaje < 1) {
