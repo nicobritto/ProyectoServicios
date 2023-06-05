@@ -138,6 +138,11 @@ public class ControllerUsuario {
         servicioTrabajo.modificarProveedorCalificacion(trabajo.getProveedor().getId());
         
         return "redirect:../contratados";
+        } catch (Exception e) {
+            modelo.put("Error", e.getMessage());
+            
+            return "redirect:../contratados";
+        }
     }
     
     @GetMapping("/cancelado/{id}")
@@ -152,10 +157,6 @@ public class ControllerUsuario {
         modelo.put("trabajos", trabajos);
         
         return "redirect:../contratados";
-        } catch (Exception e) {
-            modelo.put("Error", e.getMessage());
-            
-            return "redirect:../contratados";
-        }
+        
     }
 }

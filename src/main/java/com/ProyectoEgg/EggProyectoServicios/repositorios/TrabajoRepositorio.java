@@ -15,7 +15,7 @@ public interface TrabajoRepositorio extends JpaRepository<Trabajo, String>{
  @Query("SELECT t FROM Trabajo t WHERE t.proveedor.id= :id")
     public Optional <Trabajo> buscarTrabajoPorIdPRoveedor(@Param("id") String id);
     
- @Query("SELECT t FROM Trabajo t WHERE t.proveedor.id= :id AND t.estado LIKE 'ACEPTADO'")
+ @Query("SELECT t FROM Trabajo t WHERE t.proveedor.id= :id")
     public List<Trabajo> listarPorProveedor(@Param("id") String id); 
     
 @Query("SELECT t FROM Trabajo t WHERE t.usuario.id= :id")

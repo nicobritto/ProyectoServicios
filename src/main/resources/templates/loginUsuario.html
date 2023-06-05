@@ -5,52 +5,7 @@
         <div class="background-image"></div>
 
         <div class="container-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom-width hide-navbar">
-                <div class="navbar-collapse justify-content-end">
-                    <ul class="navbar-nav">
-                        <button class="btn" type="submit" th:if="${session.usuariosession != null}">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-                            </li>
-                        </button>
-                        <button class="btn" type="submit" th:if="${session.usuariosession != null}">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Servicios
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                    <li><a class="dropdown-item" th:href="@{/proveedores}">Todos los Servicios</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" name="nombre" th:href="@{/buscarPorRubro/gasista}">Gasistas</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" name="nombre" th:href="@{/buscarPorRubro/plomero}">Plomeros</a></li>
-                                </ul>
-                            </li>
-                        </button>
-                        <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Rubros
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                    <li><a class="dropdown-item" th:href="@{/rubro/registrarRubro}">Agregar</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" name="nombre" th:href="@{/rubro/listaRubros}">Listar</a></li>
-                                </ul>
-                            </li>
-                        </button>
-                        <button class="btn" type="submit" th:if="${session.usuariosession != null}">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/logout">Cerrar sesion</a>
-                            </li>
-                        </button>
-                    </ul>
-                </div>
-                <form class="d-flex form-search" th:if="${session.usuariosession != null}">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </nav>
+            
 
             <div class="text-center">
                 <div class="row justify-content-center">
@@ -67,18 +22,15 @@
                             </div>
                             <button type="submit" class="btn btn-primary mt-3 botones">Ingresar</button>
                         </form>
-                    </div>
-                </div>
-
-                <div class="button-container">
+                        <div class="button-container">
                     <div class="btn-group">
-                        <button class="btn" type="submit" th:if="${session.usuariosession == null}" th:href="@{/registrar}">
+                        <a class="btn" type="submit" th:if="${session.usuariosession == null}" th:href="@{/registrar}">
                             Registrarse como Proveedor
-                        </button>
+                        </a>
 
-                        <button class="btn" type="submit" th:if="${session.usuariosession == null}" th:href="@{/usuarios/registrar}">
+                        <a class="btn" type="submit" th:if="${session.usuariosession == null}" th:href="@{/usuarios/registrar}">
                             Registrarse como Usuario
-                        </button>
+                        </a>
                     </div>
 
                     <button class="btn btn-ingresar" type="submit">
@@ -93,10 +45,15 @@
                         <p class="card-text" th:text="${error}"></p>
                     </div>
                 </div>
+                    </div>
+                </div>
+
+                
             </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+            
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 </html>
