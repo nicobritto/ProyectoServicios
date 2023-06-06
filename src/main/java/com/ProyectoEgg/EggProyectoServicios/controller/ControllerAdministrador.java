@@ -1,6 +1,9 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioAdministrador;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioUsuario;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,11 +20,14 @@ public class ControllerAdministrador {
     @Autowired
     ServicioAdministrador servicioAdmin;
     
-    @GetMapping("/dashboard")
-    public String panelAdministrativo(ModelMap modelo){
-        
-        return "Admin.html";
-    }
+    @Autowired
+    ServicioUsuario servicioUsuario;
+    
+//    @GetMapping("/dashboard")
+//    public String panelAdministrativo(ModelMap modelo){
+//        
+//        return "Admin.html";
+//    }
     
     @GetMapping("/registrar")
     public String registrarAdmin(){
@@ -62,5 +68,15 @@ public class ControllerAdministrador {
             modelo.put("error", "Error al modificar el administrador");
             return "AdminModificar.html";
         }
+    }
+    
+    @GetMapping("/usuarios")
+    public String administrarUsuarios(ModelMap modelo){
+        
+        List<Usuario> usuarios = servicioUsuario.listarTodos();
+         
+        modelo.addAttribute("usuarios", usuarios);
+        
+        return "Admin_usuarios_todos.html";
     }
 }
