@@ -11,6 +11,8 @@ public class Usuario extends Persona {
 
     @OneToMany
     private List <Trabajo> trabajos;
+    
+      private Boolean baja;
 
     public Usuario() {
     }
@@ -31,6 +33,15 @@ public class Usuario extends Persona {
     public void setTrabajos(List<Trabajo> trabajos) {
         this.trabajos = trabajos;
     }
+
+    public Boolean getBaja() {
+        return baja;
+    }
+
+    public void setBaja(Boolean baja) {
+        this.baja = baja;
+    }
+    
 
 
 
