@@ -49,8 +49,9 @@ public class ServicioUsuario {
     public void eliminar(String id){
         
         Usuario usuario = usuarioRepositorio.getById(id);
+        usuario.setBaja(Boolean.TRUE);
         
-        usuarioRepositorio.delete(usuario);
+        usuarioRepositorio.save(usuario);
         
     }
     @Transactional
