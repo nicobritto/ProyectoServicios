@@ -17,6 +17,7 @@ public class Proveedor extends Persona{
     @ManyToOne
     private Rubro rubro;
     private Float calificacion;
+    private Boolean baja;//terminar
     
     @OneToMany
     private List <Trabajo> trabajos;
@@ -53,6 +54,15 @@ public class Proveedor extends Persona{
         this.descripcionTrabajo = descripcionTrabajo;
        
     }
+
+    public Boolean getBaja() {
+        return baja;
+    }
+
+    public void setBaja(Boolean baja) {
+        this.baja = baja;
+    }
+    
   
     public String getTelefono() {
         return telefono;

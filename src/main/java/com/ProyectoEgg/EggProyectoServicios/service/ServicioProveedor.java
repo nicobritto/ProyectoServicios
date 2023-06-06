@@ -52,6 +52,7 @@ public class ServicioProveedor {
         proveedor.setRol(Rol.PROVEEDOR);
         proveedor.setHonorarios(honorarios);
         proveedor.setDescripcionTrabajo(descripcionTrabajo);
+        proveedor.setBaja(Boolean.FALSE);
         
         proveedorRepositorio.save(proveedor);
         
@@ -61,10 +62,16 @@ public class ServicioProveedor {
     public List<Proveedor> listarTodos(){
         
         List<Proveedor> proveedores = new ArrayList();
+         List<Proveedor> proveedores2 = new ArrayList();
         
         proveedores = proveedorRepositorio.findAll();
+        for (Proveedor proveedore : proveedores) {
+            if (proveedore.getBaja()==false) {
+                proveedores2.add(proveedore);
+            }
+        }
         
-        return proveedores;
+        return proveedores2;
     }
     
     @Transactional
@@ -115,9 +122,10 @@ public class ServicioProveedor {
     
     public void eliminar(String id){
         
-        Proveedor noticia = proveedorRepositorio.getById(id);
+        Proveedor proveedor = proveedorRepositorio.getById(id);
         
-        proveedorRepositorio.delete(noticia);
+        proveedor.setBaja(Boolean.TRUE);
+        proveedorRepositorio.save(proveedor);
         
     }
 
@@ -127,7 +135,16 @@ public class ServicioProveedor {
         
         proveedores = proveedorRepositorio.buscarPorRubros(rubro);
         
-        return proveedores;
+         List<Proveedor> proveedores2 = new ArrayList();
+        
+        proveedores = proveedorRepositorio.findAll();
+        for (Proveedor proveedore : proveedores) {
+            if (proveedore.getBaja()==false) {
+                proveedores2.add(proveedore);
+            }
+        }
+        
+        return proveedores2;
     }
 
     
