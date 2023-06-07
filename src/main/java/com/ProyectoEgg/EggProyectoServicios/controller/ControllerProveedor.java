@@ -123,7 +123,7 @@ public class ControllerProveedor {
 
    @GetMapping("/buscarPorRubro/{nombre}")
     public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
-
+        
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
         modelo.addAttribute("proveedores", proveedores);

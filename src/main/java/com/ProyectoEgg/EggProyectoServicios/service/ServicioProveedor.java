@@ -159,7 +159,6 @@ public class ServicioProveedor {
         
          List<Proveedor> proveedores2 = new ArrayList();
         
-        proveedores = proveedorRepositorio.findAll();
         for (Proveedor proveedore : proveedores) {
             if (proveedore.getBaja()==false) {
                 proveedores2.add(proveedore);
