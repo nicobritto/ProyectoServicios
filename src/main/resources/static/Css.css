@@ -378,3 +378,42 @@ body {
     padding: 10px; /* Ajustar el tamaño del padding */
     margin-top: 20px;
 }
+
+/*terminos y condiciones*/
+.terms-container {
+  margin-top: 20px;
+}
+
+.term-section {
+  margin-bottom: 20px;
+}
+
+.term-section h5 {
+  margin-bottom: 10px;
+}
+
+.term-section ul {
+  padding-left: 20px;
+}
+.term-description {
+  margin-bottom: 20px;
+}
+
+.term-details {
+  margin-bottom: 20px;
+}
+
+.term-details h5 {
+  margin-bottom: 10px;
+}
+
+.term-details ul {
+  padding-left: 20px;
+}
+
+
+
+
+
+
+

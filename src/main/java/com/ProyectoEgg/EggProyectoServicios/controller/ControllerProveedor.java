@@ -36,7 +36,6 @@ public class ControllerProveedor {
 
     @Autowired
     private TrabajoServicio servicioTrabajo;
-    
 
     @GetMapping("/registrar")
     public String registrar(ModelMap model) {
@@ -48,7 +47,7 @@ public class ControllerProveedor {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String apellido,
             @RequestParam String email, @RequestParam String telefono, @RequestParam(required = false) String idRubro,
-            @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Float honorarios, 
+            @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Float honorarios,
             @RequestParam(required = false) String descripcionTrabajo, MultipartFile archivo, ModelMap modelo) {
         try {
             servicioProveedor.crearProveedor(nombre, apellido, email, telefono, idRubro,
@@ -57,20 +56,23 @@ public class ControllerProveedor {
             return "loginUsuario.html";
         } catch (Exception e) {
             modelo.put("error", "No se pudo registrar, intente nuevamente");
-            
+
             return "proveedorForm.html";
         }
+    }
+
+    @GetMapping("/terminosYcondiciones")
+    public String mostrarTerminosYCondiciones() {
+        return "terminosYcondiciones.html";
     }
 
     @GetMapping("/proveedores")
     public String mostrarTodos(ModelMap modelo) {
         List<Proveedor> proveedores = servicioProveedor.listarTodosActivos();
         List<Rubro> rubros = servicioRubro.listarRubros();
-        
+
         modelo.addAttribute("rubros", rubros);
         modelo.addAttribute("proveedores", proveedores);
-
-      
 
         return "servicios_todos.html";
     }
@@ -90,7 +92,7 @@ public class ControllerProveedor {
             @RequestParam String apellido, @RequestParam String email,
             @RequestParam String telefono, @RequestParam(required = false) String idRubro,
             @RequestParam String password, @RequestParam String password2,
-            @RequestParam(required = false) Float honorarios, 
+            @RequestParam(required = false) Float honorarios,
             @RequestParam(required = false) String descripcionTrabajo, MultipartFile archivo, ModelMap modelo) {
         try {
             servicioProveedor.modificarProveedor(id, nombre, apellido, email, telefono,
@@ -114,22 +116,21 @@ public class ControllerProveedor {
             servicioProveedor.eliminar(id);
             return "redirect:../proveedores";
         } catch (Exception ex) {
-            
+
             model.put("error", ex.getMessage());
             return "redirect:../proveedores";
         }
     }
-    
 
-   @GetMapping("/buscarPorRubro/{nombre}")
+    @GetMapping("/buscarPorRubro/{nombre}")
     public String mostrarXrubro(ModelMap modelo, @PathVariable String nombre) {
         
         List<Proveedor> proveedores = servicioProveedor.listarXrubro(nombre);
 
         modelo.addAttribute("proveedores", proveedores);
-        
+
         List<Rubro> rubros = servicioRubro.listarRubros();
-        
+
         modelo.addAttribute("rubros", rubros);
 
         return "serviciosPorRubro.html";
@@ -140,13 +141,13 @@ public class ControllerProveedor {
     public String mostrarInfoProveedor(@PathVariable String id, ModelMap modelo) {
 
         Proveedor proveedor = servicioProveedor.getOne(id);
-        
+
         modelo.put("proveedor", proveedor);
- 
+
         List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedorConVoto(id);
-        
+
         modelo.put("trabajos", trabajos);
-        
+
         return "masInfoProveedor.html";
     }
 
@@ -158,18 +159,17 @@ public class ControllerProveedor {
         List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
 
         modelo.put("solicitudes", solicitudes);
-        
+
         List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
-        
+
         modelo.put("trabajos", trabajos);
 
         return "notificaciones.html";
     }
 
-   
     @PostMapping("/solicitud/{id}")
     public String crearSolicitud(@PathVariable String id, HttpSession session, ModelMap modelo) {
-        try{
+        try {
             Persona logeado = (Persona) session.getAttribute("usuariosession");
 
             modelo.put("proveedor", servicioProveedor.getOne(id));
@@ -179,65 +179,64 @@ public class ControllerProveedor {
             modelo.put("solicitud", solicitud);
 
             return "index.html";
-            
-        } catch (Exception ex) {   
+
+        } catch (Exception ex) {
 
             modelo.put("error", ex.getMessage());
-            
+
             return "redirect:../notificaciones";
         }
     }
-    
+
     @PostMapping("/trabajo/{id}")
-    public String crearTrabajo(HttpSession session, ModelMap modelo, @RequestParam String estado, 
-            @PathVariable String id) {
-        try{
-        Persona logeado = (Persona) session.getAttribute("usuariosession");
-
-        Solicitud solicitud = servicioSolicitud.getOne(id);
-        
-        Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado), solicitud.getUsuario().getId());
-        
-        servicioSolicitud.modificarEstado(id, Boolean.FALSE);
-
-        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
-        
-        modelo.put("trabajos", trabajos);
-        
-        return "redirect:../notificaciones";
-        
-        } catch (Exception ex) {    
-            
-            modelo.put("error", ex.getMessage());
-            
-            return "redirect:../notificaciones";
-        }
-    }
-    
-    
-    @PostMapping("/aceptados/{id}")
-    public String listaTrabajos(HttpSession session, ModelMap modelo, @RequestParam String estado, 
+    public String crearTrabajo(HttpSession session, ModelMap modelo, @RequestParam String estado,
             @PathVariable String id) {
         try {
-        Persona logeado = (Persona) session.getAttribute("usuariosession");
-        
-        servicioTrabajo.modificarEstado(id, Estado.valueOf(estado));
+            Persona logeado = (Persona) session.getAttribute("usuariosession");
 
-        List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+            Solicitud solicitud = servicioSolicitud.getOne(id);
 
-        modelo.put("solicitudes", solicitudes);
-        
-        List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
-        
-        modelo.put("trabajos", trabajos);
-        
-        return "redirect:../notificaciones";
-        } catch (Exception ex) {  
-            
+            Trabajo trabajo = servicioTrabajo.crearTrabajo(logeado.getId(), Estado.valueOf(estado), solicitud.getUsuario().getId());
+
+            servicioSolicitud.modificarEstado(id, Boolean.FALSE);
+
+            List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+
+            modelo.put("trabajos", trabajos);
+
+            return "redirect:../notificaciones";
+
+        } catch (Exception ex) {
+
             modelo.put("error", ex.getMessage());
-            
+
             return "redirect:../notificaciones";
         }
     }
-    
+
+    @PostMapping("/aceptados/{id}")
+    public String listaTrabajos(HttpSession session, ModelMap modelo, @RequestParam String estado,
+            @PathVariable String id) {
+        try {
+            Persona logeado = (Persona) session.getAttribute("usuariosession");
+
+            servicioTrabajo.modificarEstado(id, Estado.valueOf(estado));
+
+            List<Solicitud> solicitudes = servicioSolicitud.listarSolicitudesTrueXProveedor(logeado.getId());
+
+            modelo.put("solicitudes", solicitudes);
+
+            List<Trabajo> trabajos = servicioTrabajo.trabajosXProveedor(logeado.getId());
+
+            modelo.put("trabajos", trabajos);
+
+            return "redirect:../notificaciones";
+        } catch (Exception ex) {
+
+            modelo.put("error", ex.getMessage());
+
+            return "redirect:../notificaciones";
+        }
+    }
+
 }
