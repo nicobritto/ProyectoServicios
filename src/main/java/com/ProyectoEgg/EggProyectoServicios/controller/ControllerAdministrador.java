@@ -53,6 +53,7 @@ public class ControllerAdministrador {
         }
     }
     
+    
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
         
