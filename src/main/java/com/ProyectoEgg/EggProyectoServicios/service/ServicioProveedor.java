@@ -120,6 +120,7 @@ public class ServicioProveedor {
         return proveedorRepositorio.getOne(id);
     }
     
+    @Transactional
     public void eliminar(String id){
         
         Proveedor proveedor = proveedorRepositorio.getById(id);

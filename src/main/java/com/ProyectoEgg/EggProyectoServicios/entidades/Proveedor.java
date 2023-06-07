@@ -17,7 +17,7 @@ public class Proveedor extends Persona{
     @ManyToOne
     private Rubro rubro;
     private Float calificacion;
-    private Boolean baja;//terminar
+    private Boolean baja;
     
     @OneToMany
     private List <Trabajo> trabajos;

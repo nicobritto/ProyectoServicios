@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head">
+    </head>
+    <body>
+
+        <nav th:replace="/fragments/navbar :: nav"> </nav>
+        <div class="row justify-content-center" style="text-align: center">
+            <div class="col col-4">
+                <h3>Lista de Usuarios</h3>
+            </div>
+
+            <div class="col col-10">
+                <table class="table table-responsive table-striped table-hover">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Rol</th>
+                            <!--<th scope="col">Estado</th>-->
+                            <th scope="col">Dar de Baja</th>
+                            <th scope="col">Dar de Alta</th>
+                        </tr>
+                    </thead>
+
+                    <tbody th:each="usuario : ${usuarios}" >
+                        <tr> <!-- Agregar cuando este la baja logica th:class="${usuario.estado} == 0 ? 'red-row' : ''"--> 
+                            <th  scope="row">
+                                <span  th:text="${usuario.nombre}"></span>
+                                <span  th:text="${usuario.apellido}"></span>
+                            </th>
+                            <td th:text="${usuario.email}"></td>
+                            <td th:text="${usuario.rol}"></td>
+                            <!--<td>
+                                <span th:if="${usuario.estado == 'VOTADO'}">
+                                    <p  th:text="${trabajo.voto.puntaje}"></p>
+                                </span>
+                                <span th:if="${trabajo.estado.name() != 'VOTADO'}">-</span>
+                            </td>-->
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                                        </svg></a>
+                                </button>
+                                <!--<span th:if="${trabajo.estado.name() != 'FINALIZADO'}">-</span>-->
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                                        </svg></a>
+                                </button>
+                                <!--<span th:if="${trabajo.estado.name() != 'ACEPTADO'}">-</span>-->
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </body>
+</html>

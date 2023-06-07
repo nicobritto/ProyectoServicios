@@ -16,7 +16,7 @@
                 Servicios
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                <li th:each="rubro : ${rubros}"><a  th:text="${rubro.rubros}" class="dropdown-item" name="nombre" th:href="@{/buscarPorRubro/__${rubro.rubros}__}"></a></li> 
+                <!--<li th:each="rubro : ${rubros}"><a  th:text="${rubro.rubros}" class="dropdown-item" name="nombre" th:href="@{/buscarPorRubro/__${rubro.rubros}__}"></a></li> -->
                 <li><a class="dropdown-item"  th:href="@{/proveedores}">Todos</a></li>
             </ul>
         </li>
@@ -28,8 +28,19 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
                 <li><a class="dropdown-item"   th:href="@{/rubro/registrarRubro}" >Agregar</a></li>
-
                 <li><a class="dropdown-item" name="nombre"  th:href="@{/rubro/listaRubros}">Listar</a></li>
+
+            </ul>
+        </li>
+    </button>
+    <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Personas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
+                <li><a class="dropdown-item"   th:href="@{/administrador/usuarios}" >Usuarios</a></li>
+                <li><a class="dropdown-item" name="nombre"  th:href="@{/proveedores}">Proveedores</a></li>
 
             </ul>
         </li>

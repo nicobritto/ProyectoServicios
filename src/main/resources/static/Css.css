@@ -1,6 +1,11 @@
 .navbar{
     max-height:120px; /* Alto del navbar */
 }
+.navbar .btn {
+  color: black; /* Cambia el color del texto a negro */
+}
+
+
 
 .btn:hover {
     background: linear-gradient(to right, #8548F7, #6499F0); /* Fondo degradado de rojo a azul */
@@ -30,7 +35,7 @@
     width: 100%; /* Tamaño personalizado */
     height: 275px; /* Altura ajustada automáticamente */
 }
-
+/*Modificaciones del index*/
 .container {
     background-image: url("fotoSelectIndex.jpg");
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
@@ -38,6 +43,18 @@
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
+.container3{
+   width: 1320px;
+   margin: 10px auto;
+   margin: 0 auto; /* Para centrar horizontalmente el elemento */
+   padding: 70px; /* Ajusta el valor según el tamaño de los márgenes que desees */ 
+   background-color:#24303c; /* Cambia este valor por el color de fondo deseado */
+   box-shadow: 7px 13px 37px #000;
+   border-radius: 6px;
+}
+.custom-card .card-body .btn-group {
+    margin-top: 25px; /* Ajusta el valor según el espacio deseado */
+}
 .custom-texto {
     text-align: left;
     margin-left: -250px;
@@ -140,12 +157,14 @@
     font-size: 16px;
 }
 
+/*  
 body {
     background-image: url("fotoSelectIndex.jpg");
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
-    background-position: center; /* Centra la imagen en el contenedor */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor 
+    background-position: center; /* Centra la imagen en el contenedor 
+    background-repeat: no-repeat; /* Evita que la imagen se repita 
 }
+   */
 
 
 
@@ -234,12 +253,16 @@ body {
     box-shadow: 7px 13px 37px #000;
 }
 
+/*  
 body {
     background-image: url("fotoSelectIndex.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor 
+    background-position: center; /* Centra la imagen en el contenedor 
+    background-repeat: no-repeat; /* Evita que la imagen se repita 
 }
+   */
+
+   
 .btn-group {
     display: flex;
 }
