@@ -3,43 +3,40 @@
     <head th:replace="/fragments/head :: head"> </head>
     <body>
 
-        <div class="row justify-content-center" style="text-align: left">
-            <div class="col col-6">
+      <div class="container-masInfo">
+        <div class="row">
+            <div class="col-6 float-left form-registerMasInfo">
+                <div class="container-masInfo">
+                    <p><img class="fotoMasInfo" th:src="@{/imagen/perfil/__${proveedor.id}__}"></p>
+                    <p>Nombre: <span th:text="${proveedor.nombre}"></span></p>
+                    <p>Apellido: <span th:text="${proveedor.apellido}"></span></p>
+                    <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></span></p>
+                    <p th:if="${session.usuariosession != null}">Teléfono: <span th:text="${proveedor.telefono}"></span></p>
+                    <p th:if="${session.usuariosession != null}">Email: <span th:text="${proveedor.email}"></span></p>
+                    <p>Descripción del servicio: <span th:text="${proveedor.descripcionTrabajo}"></span></p>
+                    <p th:if="${session.usuariosession != null}">Precio del servicio por hora: $<span th:text="${proveedor.honorarios}"></span></p>
+                    <p>Calificación: <span th:text="${proveedor.calificacion}"></span></p>
 
-                <p><img class="logo"  th:src="@{/imagen/perfil/__${proveedor.id}__}" ></p>
-                <p>Nombre: <span th:text="${proveedor.nombre}"></p>
-                <p>Apellido: <span th:text="${proveedor.apellido}"></p>
-                <p>Rubro: <span th:text="${proveedor.rubro.rubros}"></p>
-                <p th:if="${session.usuariosession != null}">Teléfono: <span th:text="${proveedor.telefono}"></p>
-                <p th:if="${session.usuariosession != null}">Email:  <span th:text="${proveedor.email}"></p>
-                <p>Descripción del servicio: <span th:text="${proveedor.descripcionTrabajo}"></p>
-                <p th:if="${session.usuariosession != null}">Precio del servicio por hora:  $<span th:text="${proveedor.honorarios}"></p>
-                <p>Calificación:  <span th:text="${proveedor.calificacion}"></p>
-
-
-                <form class="formulario" th:action= "@{/solicitud/__${proveedor.id}__}" method="POST" sec:authorize="hasRole('USER')">
-                    <input hidden th:value="${id}" name="id">
-                    <input class="btn btn-primary" type="submit" value="Contratar">
-                </form>
-
+                    <form class="formulario" th:action="@{/solicitud/__${proveedor.id}__}" method="POST" sec:authorize="hasRole('USER')">
+                        <input hidden th:value="${id}" name="id">
+                        <input class="btn btn-primary" type="submit" value="Contratar">
+                    </form>
+                </div>
             </div>
 
-            <div class="row justify-content-center" style="text-align: left">
-                <div class="col col-6">
-                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;"  th:each="trabajo : ${trabajos}" >
+            <div class="col-6 float-right">
+                <div class="card-container container-wrapperMasInfo">
+                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" th:each="trabajo : ${trabajos}">
                         <div class="card-header" th:text="${trabajo.usuario.nombre}"></div>
                         <div class="card-body">
                             <h5 class="card-title" th:text="${'Calificacion: ' + trabajo.voto.puntaje}"></h5>
                             <p class="card-text" th:text="${trabajo.voto.resenia}"></p>
                         </div>
                     </div>
-
-                </div>   
-
-            </div>  
-
+                </div>
+            </div>
         </div>
-
-
+    </div>
+    
     </body>
 </html>

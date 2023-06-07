@@ -6,15 +6,22 @@
 
         <nav th:replace="/fragments/navbar :: nav"> </nav>
         <div class="row justify-content-center" style="text-align: center">
-            <div class="col col-4">
-                <h3>Lista de Servicios</h3>
+            <div class="col col-10">
+                <table class="table table-responsive table-striped table-hover table-primary">
+                    <thead>
+                        <tr>
+                            <th sope="col">Lista de servicios</th>
+                        </tr>
+                    </thead>
+
+                </table>
             </div>
 
             <div class="col col-10">
-                <table class="table table-responsive table-striped table-hover">
+                <table class="table table-responsive table-striped table-hover my-tableR ">
 
                     <thead>
-                        <tr>
+                        <tr style="background-color: #B2CBF4; color: black;">
                             <th scope="col">Servicio</th>
                             <th scope="col">Proveedor</th>
                             <th scope="col">Estado</th>
@@ -25,7 +32,7 @@
                     </thead>
 
                     <tbody th:each="trabajo : ${trabajos}" >
-                        <tr th:class="${trabajo.estado.name()} == 'RECHAZADO' ? 'red-row' : ''">
+                        <tr th:class="${trabajo.estado.name()} == 'RECHAZADO' ? 'red-row' : 'accepted-row'"style="background-color: #B2CBF4; color: white;">
                             <th scope="row" th:text="${trabajo.proveedor.rubro.rubros}"></th>
                             <td>
                                 <span  th:text="${trabajo.proveedor.nombre}"></span>
