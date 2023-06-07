@@ -1,7 +1,9 @@
 package com.ProyectoEgg.EggProyectoServicios.controller;
 
+import com.ProyectoEgg.EggProyectoServicios.entidades.Proveedor;
 import com.ProyectoEgg.EggProyectoServicios.entidades.Usuario;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioAdministrador;
+import com.ProyectoEgg.EggProyectoServicios.service.ServicioProveedor;
 import com.ProyectoEgg.EggProyectoServicios.service.ServicioUsuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ControllerAdministrador {
     
     @Autowired
     ServicioUsuario servicioUsuario;
+    
+    @Autowired
+    ServicioProveedor servicioProveedor;
     
 //    @GetMapping("/dashboard")
 //    public String panelAdministrativo(ModelMap modelo){
@@ -74,9 +79,63 @@ public class ControllerAdministrador {
     public String administrarUsuarios(ModelMap modelo){
         
         List<Usuario> usuarios = servicioUsuario.listarTodos();
-         
+        List<Proveedor> proveedores = servicioProveedor.listarTodos();
+        
         modelo.addAttribute("usuarios", usuarios);
+        modelo.addAttribute("proveedores", proveedores);
         
         return "Admin_usuarios_todos.html";
+    }
+    
+    @GetMapping("/eliminarProveedor/{id}")
+    public String eliminarProveedor(@PathVariable String id, ModelMap model) {
+
+        try {
+            servicioProveedor.eliminar(id);
+            return "redirect:../usuarios";
+        } catch (Exception ex) {
+            
+            model.put("error", "No se pudo eliminar el proveedor");
+            return "redirect:../usuarios";
+        }
+    }
+    
+    @GetMapping("/eliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable String id, ModelMap model) {
+
+        try {
+            servicioUsuario.eliminar(id);
+            return "redirect:../usuarios";
+        } catch (Exception ex) {
+            
+            model.put("error", "No se pudo eliminar el usuario");
+            return "redirect:../usuarios";
+        }
+    }
+    
+    @GetMapping("/darDeAltaProveedor/{id}")
+    public String darDeAltaProveedor(@PathVariable String id, ModelMap model) {
+
+        try {
+            servicioProveedor.darDeAlta(id);
+            return "redirect:../usuarios";
+        } catch (Exception ex) {
+            
+            model.put("error", "No se pudo dar de alta al proveedor");
+            return "redirect:../usuarios";
+        }
+    }
+    
+    @GetMapping("/darDeAltaUsuario/{id}")
+    public String darDeAltaUsuario(@PathVariable String id, ModelMap model) {
+
+        try {
+            servicioUsuario.darDeAlta(id);
+            return "redirect:../usuarios";
+        } catch (Exception ex) {
+            
+            model.put("error", "No se pudo dar de alta al usuario");
+            return "redirect:../usuarios";
+        }
     }
 }
