@@ -56,7 +56,7 @@ public class ControllerProveedor {
             modelo.put("exito", "Se registró correctamente!");
             return "loginUsuario.html";
         } catch (Exception e) {
-            modelo.put("error", e.getMessage());
+            modelo.put("error", "No se pudo registrar, intente nuevamente");
             
             return "proveedorForm.html";
         }
@@ -64,7 +64,7 @@ public class ControllerProveedor {
 
     @GetMapping("/proveedores")
     public String mostrarTodos(ModelMap modelo) {
-        List<Proveedor> proveedores = servicioProveedor.listarTodos();
+        List<Proveedor> proveedores = servicioProveedor.listarTodosActivos();
         List<Rubro> rubros = servicioRubro.listarRubros();
         
         modelo.addAttribute("rubros", rubros);

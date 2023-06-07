@@ -16,8 +16,15 @@
                 Servicios
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                <!--<li th:each="rubro : ${rubros}"><a  th:text="${rubro.rubros}" class="dropdown-item" name="nombre" th:href="@{/buscarPorRubro/__${rubro.rubros}__}"></a></li> -->
                 <li><a class="dropdown-item"  th:href="@{/proveedores}">Todos</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/gasista}">Gasistas</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/carpintero}">Carpinteros</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/pintor}">Pintores</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/plomero}">Plomeros</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/electricista}">Electricistas</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/herrero}">Herreros</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/niñero}">Niñeros</a></li>
+                <li><a class="dropdown-item"  th:href="@{/buscarPorRubro/limpieza}">Limpieza</a></li>
             </ul>
         </li>
     </button>
@@ -35,16 +42,12 @@
     </button>
     <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('ADMIN')">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Personas
+            <a class="nav-link active" th:href="@{/administrador/usuarios}"  id="navbarDropdown" role="button" aria-expanded="false" aria-current="page">
+                Usuarios
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#DCA6FC">
-                <li><a class="dropdown-item"   th:href="@{/administrador/usuarios}" >Usuarios</a></li>
-                <li><a class="dropdown-item" name="nombre"  th:href="@{/proveedores}">Proveedores</a></li>
-
-            </ul>
         </li>
     </button>
+   
     <button class="btn" type="submit" th:if="${session.usuariosession != null}" sec:authorize="hasRole('PROVEEDOR')">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

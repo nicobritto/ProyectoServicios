@@ -59,7 +59,7 @@ public class ServicioProveedor {
     }
     
     @Transactional(readOnly = true)
-    public List<Proveedor> listarTodos(){
+    public List<Proveedor> listarTodosActivos(){
         
         List<Proveedor> proveedores = new ArrayList();
          List<Proveedor> proveedores2 = new ArrayList();
@@ -72,6 +72,17 @@ public class ServicioProveedor {
         }
         
         return proveedores2;
+    }
+    
+    @Transactional
+    public List<Proveedor> listarTodos(){
+
+        List<Proveedor> proveedores = new ArrayList<>();
+
+        proveedores = proveedorRepositorio.findAll();
+
+        return proveedores;
+
     }
     
     @Transactional
@@ -126,6 +137,16 @@ public class ServicioProveedor {
         Proveedor proveedor = proveedorRepositorio.getById(id);
         
         proveedor.setBaja(Boolean.TRUE);
+        proveedorRepositorio.save(proveedor);
+        
+    }
+    
+    @Transactional
+    public void darDeAlta(String id){
+        
+        Proveedor proveedor = proveedorRepositorio.getById(id);
+        
+        proveedor.setBaja(Boolean.FALSE);
         proveedorRepositorio.save(proveedor);
         
     }

@@ -44,11 +44,11 @@ public class ControllerUsuario {
         try {
 
             servicioUsuario.crearUsuario(nombre, apellido, email, password, password2);
-            modelo.put("exito", "usuario creado con exito");
-            return "index.html";
+            modelo.put("exito", "Usuario creado con exito");
+            return "loginUsuario.html";
 
         } catch (Exception e) {
-            modelo.put("error", e);
+            modelo.put("error", "No se pudo registrar, intente nuevamente");
             return "usuarioForm.html";
         }
 

@@ -33,6 +33,7 @@ public class ServicioUsuario {
         usuario.setApellido(apellido);
         usuario.setEmail(email);
         usuario.setRol(Rol.USER);
+        usuario.setBaja(Boolean.FALSE);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         
         usuarioRepositorio.save(usuario);
@@ -54,6 +55,17 @@ public class ServicioUsuario {
         usuarioRepositorio.save(usuario);
         
     }
+    
+    @Transactional
+    public void darDeAlta(String id){
+        
+        Usuario usuario = usuarioRepositorio.getById(id);
+        
+        usuario.setBaja(Boolean.FALSE);
+        usuarioRepositorio.save(usuario);
+        
+    }
+    
     @Transactional
     public List<Usuario> listarTodos(){
 
