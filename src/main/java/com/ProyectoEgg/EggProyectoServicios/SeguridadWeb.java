@@ -31,7 +31,6 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter{
         
         http
                 .authorizeRequests()
-                    .antMatchers("/administrador/*").hasRole("ADMIN")
                     .antMatchers("/rubro/*").hasRole("ADMIN")
                     .antMatchers("/proveedor/*").hasRole("PROVEEDOR")
                     .antMatchers("\"/css/\", \"/js/\", \"/img/\", \"/*\"")
