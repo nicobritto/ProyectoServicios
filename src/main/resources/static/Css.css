@@ -351,3 +351,30 @@ body {
     color: white;
 }
 
+/*Modificaciones vista calif*/
+.cuadro {
+    border: 1px solid transparent; 
+    padding: 50px 5px; /* Ajustar el padding superior (30px) e inferior (20px) */
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #24303c;
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+    
+    .cuadro input,
+    .cuadro textarea {
+        background: #24303c;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #1f53c5;
+        font-family: 'calibri';
+        font-size: 18px;
+        color: white;
+    }
+    .cuadro input[type="number"] {
+    border: 1px solid #1f53c5; /* Ajustar el grosor del borde */
+    padding: 10px; /* Ajustar el tamaño del padding */
+    margin-top: 20px;
+}
