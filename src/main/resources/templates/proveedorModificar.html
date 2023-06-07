@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head"> </head>
     <body>
+        <nav th:replace="/fragments/navbar :: nav"></nav> 
+        
         <section class="form-register with-background">
             <form class="formulario" th:action= "@{/modificar/__${proveedor.id}__}" method="POST" enctype="multipart/form-data">
                 <h4>Modifique sus datos</h4>
@@ -33,9 +35,6 @@
 
                 <button type="submit" class="btn btn-primary mt-3 botones">Modificar</button>
                 <a class="btn btn-primary mt-3 botones" th:href="@{/}" role="button">Cancelar</a>
-                <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-                
-                <p><a href="/login">Ya tengo Cuenta</a></p>
 
             </form>
             <div th:if="${error != null}" class="text-white bg-success mb-3 mensajeError">
@@ -51,7 +50,9 @@
                 </div>
             </div>
         </section>
-
+        
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 </html>
