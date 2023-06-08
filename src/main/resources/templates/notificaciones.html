@@ -2,117 +2,118 @@
 <html>
     <head th:replace="/fragments/head :: head"> </head>
     <body>
-        <nav th:replace="/fragments/navbar :: nav"></nav>
+        <main>
+            <nav th:replace="/fragments/navbar :: nav"></nav>
 
-        <div class="row justify-content-center" style="text-align: center">
-            <div class="col col-4" th:if="${solicitudes.isEmpty()}">
-                <h3 style="color: red">No tiene nuevas solicitudes</h3>
+            <div class="row justify-content-center" style="text-align: center">
+                <div class="col col-4" th:if="${solicitudes.isEmpty()}">
+                    <h3 style="color: red">No tiene nuevas solicitudes</h3>
+                </div>
+                <div class="col col-10" th:if="${!solicitudes.isEmpty()}">
+                    <table class="table table-responsive table-striped table-hover table-primary">
+                        <thead>
+                            <tr>
+                                <th sope="col">Solicitudes</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                    <div>
+                        <table class="table table-responsive table-striped table-hover table-primary ">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre del solicitante</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Acciones</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody th:each="solicitud : ${solicitudes}">
+                                <tr>
+                                    <td scope="row" th:text="${solicitud.usuario.nombre}"></td>
+                                    <td th:text="${solicitud.usuario.apellido}"></td>
+                                    <td th:text="${solicitud.usuario.email}"></td>
+                                    <td>
+                                        <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
+                                            <input hidden th:value="${id}" name="id">
+                                            <input class="btn btn-primary" type="submit" value="Aceptar">
+                                            <input hidden value="ACEPTADO" name="estado">
+                                        </form> 
+                                    </td>
+                                    <td>
+                                        <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
+                                            <input hidden th:value="${id}" name="id">
+                                            <input class="btn btn-primary" type="submit" value="Rechazar">
+                                            <input hidden value="RECHAZADO" name="estado">
+                                        </form> 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="col col-10" th:if="${!solicitudes.isEmpty()}">
-                <table class="table table-responsive table-striped table-hover table-primary">
-                    <thead>
-                        <tr>
-                            <th sope="col">Solicitudes</th>
-                        </tr>
-                    </thead>
 
-                </table>
+            <br>
+            <br>
+            <div class="row justify-content-center" style="text-align: center">
+                <div class="col col-10">
+                    <table class="table table-responsive table-striped table-hover table-primary">
+                        <thead>
+                            <tr>
+                                <th sope="col">Servicios Aceptados</th>
+                            </tr>
+                        </thead>
 
-                <div>
-                    <table class="table table-responsive table-striped table-hover table-primary ">
+                    </table>
+                </div>
+
+
+
+                <div class="col col-10">
+                    <table class="table table-responsive table-striped table-hover table-primary">
 
                         <thead>
                             <tr>
                                 <th scope="col">Nombre del solicitante</th>
                                 <th scope="col">Apellido</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Puntaje</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
 
-                        <tbody th:each="solicitud : ${solicitudes}">
+                        <tbody th:each="trabajo : ${trabajos}" th:class="${trabajo.estado.name()} == 'CANCELADO' ? 'red-row' : ''">
                             <tr>
-                                <td scope="row" th:text="${solicitud.usuario.nombre}"></td>
-                                <td th:text="${solicitud.usuario.apellido}"></td>
-                                <td th:text="${solicitud.usuario.email}"></td>
+                                <td scope="row" th:text="${trabajo.usuario.nombre}"></td>
+                                <td th:text="${trabajo.usuario.apellido}"></td>
+                                <td th:text="${trabajo.usuario.email}"></td>
+                                <td th:text="${trabajo.estado}"></td>
                                 <td>
-                                    <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
-                                        <input hidden th:value="${id}" name="id">
-                                        <input class="btn btn-primary" type="submit" value="Aceptar">
-                                        <input hidden value="ACEPTADO" name="estado">
-                                    </form> 
+                                    <span th:if="${trabajo.estado.name() == 'VOTADO'}">
+                                        <p  th:text="${trabajo.voto.puntaje}"></p>
+                                    </span>
+                                    <span th:if="${trabajo.estado.name() != 'VOTADO'}">-</span>
                                 </td>
                                 <td>
-                                    <form class="formulario" th:action= "@{/trabajo/__${solicitud.id}__}" method="POST">
+                                    <form class="formulario" th:if="${trabajo.estado.name() == 'ACEPTADO'}" th:action= "@{/aceptados/__${trabajo.id}__}" method="POST">
                                         <input hidden th:value="${id}" name="id">
-                                        <input class="btn btn-primary" type="submit" value="Rechazar">
-                                        <input hidden value="RECHAZADO" name="estado">
+                                        <input class="btn btn-primary" type="submit" value="Finalizar">
+                                        <input hidden value="FINALIZADO" name="estado">
                                     </form> 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
-        </div>
-
-        <br>
-        <br>
-        <div class="row justify-content-center" style="text-align: center">
-            <div class="col col-10">
-                <table class="table table-responsive table-striped table-hover table-primary">
-                    <thead>
-                        <tr>
-                            <th sope="col">Servicios Aceptados</th>
-                        </tr>
-                    </thead>
-
-                </table>
-            </div>
-
-
-
-            <div class="col col-10">
-                <table class="table table-responsive table-striped table-hover table-primary">
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre del solicitante</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Puntaje</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody th:each="trabajo : ${trabajos}" th:class="${trabajo.estado.name()} == 'CANCELADO' ? 'red-row' : ''">
-                        <tr>
-                            <td scope="row" th:text="${trabajo.usuario.nombre}"></td>
-                            <td th:text="${trabajo.usuario.apellido}"></td>
-                            <td th:text="${trabajo.usuario.email}"></td>
-                            <td th:text="${trabajo.estado}"></td>
-                            <td>
-                                <span th:if="${trabajo.estado.name() == 'VOTADO'}">
-                                    <p  th:text="${trabajo.voto.puntaje}"></p>
-                                </span>
-                                <span th:if="${trabajo.estado.name() != 'VOTADO'}">-</span>
-                            </td>
-                            <td>
-                                <form class="formulario" th:if="${trabajo.estado.name() == 'ACEPTADO'}" th:action= "@{/aceptados/__${trabajo.id}__}" method="POST">
-                                    <input hidden th:value="${id}" name="id">
-                                    <input class="btn btn-primary" type="submit" value="Finalizar">
-                                    <input hidden value="FINALIZADO" name="estado">
-                                </form> 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-
+        </main>
         <footer th:replace="/fragments/footer :: footer"></footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

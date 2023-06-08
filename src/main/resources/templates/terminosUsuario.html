@@ -2,67 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head"> </head>
     <body>
-        <nav th:replace="/fragments/navbar :: nav"></nav> 
 
-        <section class="form-register with-background">
-            <h4>Terminos y condiciones</h4>
-            <div class="terms-container">
-                <div class="term-section">
-                    <div class="term-description">
-                        <p>Bienvenido(a) a nuestra aplicación de servicios. Antes de utilizar nuestra plataforma, te pedimos que leas y aceptes nuestros términos y condiciones.</p>
+        <nav th:replace="/fragments/navbar :: nav"></nav> 
+        <main>
+            <section class="form-register with-background">
+                <h4>Terminos y condiciones</h4>
+                <div class="terms-container">
+                    <div class="term-section">
+                        <div class="term-description">
+                            <p>Bienvenido(a) a nuestra aplicación de servicios. Antes de utilizar nuestra plataforma, te pedimos que leas y aceptes nuestros términos y condiciones.</p>
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+                    <div class="term-section">
+                        <h5>Uso de la aplicación:</h5>
+                        <ul>
+                            <li>Nuestra aplicación te permite acceder a una variedad de servicios proporcionados por proveedores registrados.</li>
+                            <li>Debes utilizar la aplicación de acuerdo con las leyes y regulaciones aplicables.</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-section">
+                        <h5>Responsabilidad del usuario:</h5>
+                        <ul>
+                            <li>Eres responsable de mantener la confidencialidad de tus credenciales de inicio de sesión.</li>
+                            <li>No debes utilizar la aplicación para actividades ilegales, fraudulentas o que violen los derechos de terceros.</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-section">
+                        <h5>Servicios proporcionados:</h5>
+                        <ul>
+                            <li>Los servicios son proporcionados por proveedores externos. No somos responsables de la calidad o entrega de los servicios.</li>
+                            <li>Al utilizar los servicios, aceptas los términos y condiciones establecidos por los proveedores.</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-section">
+                        <h5>Propiedad intelectual:</h5>
+                        <ul>
+                            <li>Todos los derechos de propiedad intelectual relacionados con la aplicación son de nuestra propiedad o de terceros licenciantes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-section">
+                        <h5>Limitación de responsabilidad:</h5>
+                        <ul>
+                            <li>No nos hacemos responsables de ningún daño, pérdida o lesión resultante del uso de la aplicación o de los servicios prestados.</li>
+                        </ul>
+                    </div>
+
+                    <div class="term-section">
+                        <h5>Modificaciones de los términos y condiciones:</h5>
+                        <ul>
+                            <li>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Te notificaremos sobre cualquier cambio.</li>
+                            <li>Al utilizar nuestra aplicación, confirmas que has leído y aceptado estos términos y condiciones. Si no estás de acuerdo con ellos, te solicitamos que no utilices nuestra aplicación.</li>
+                        </ul>
                     </div>
                 </div>
-                <br><br><br><br><br>
-                <div class="term-section">
-                    <h5>Uso de la aplicación:</h5>
-                    <ul>
-                        <li>Nuestra aplicación te permite acceder a una variedad de servicios proporcionados por proveedores registrados.</li>
-                        <li>Debes utilizar la aplicación de acuerdo con las leyes y regulaciones aplicables.</li>
-                    </ul>
-                </div>
-
-                <div class="term-section">
-                    <h5>Responsabilidad del usuario:</h5>
-                    <ul>
-                        <li>Eres responsable de mantener la confidencialidad de tus credenciales de inicio de sesión.</li>
-                        <li>No debes utilizar la aplicación para actividades ilegales, fraudulentas o que violen los derechos de terceros.</li>
-                    </ul>
-                </div>
-
-                <div class="term-section">
-                    <h5>Servicios proporcionados:</h5>
-                    <ul>
-                        <li>Los servicios son proporcionados por proveedores externos. No somos responsables de la calidad o entrega de los servicios.</li>
-                        <li>Al utilizar los servicios, aceptas los términos y condiciones establecidos por los proveedores.</li>
-                    </ul>
-                </div>
-
-                <div class="term-section">
-                    <h5>Propiedad intelectual:</h5>
-                    <ul>
-                        <li>Todos los derechos de propiedad intelectual relacionados con la aplicación son de nuestra propiedad o de terceros licenciantes.</li>
-                    </ul>
-                </div>
-
-                <div class="term-section">
-                    <h5>Limitación de responsabilidad:</h5>
-                    <ul>
-                        <li>No nos hacemos responsables de ningún daño, pérdida o lesión resultante del uso de la aplicación o de los servicios prestados.</li>
-                    </ul>
-                </div>
-
-                <div class="term-section">
-                    <h5>Modificaciones de los términos y condiciones:</h5>
-                    <ul>
-                        <li>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Te notificaremos sobre cualquier cambio.</li>
-                        <li>Al utilizar nuestra aplicación, confirmas que has leído y aceptado estos términos y condiciones. Si no estás de acuerdo con ellos, te solicitamos que no utilices nuestra aplicación.</li>
-                    </ul>
-                </div>
+            </section>
+            <div class="text-center mt-4">
+                <a href="/usuarios/registrar" class="btn btn-primary">Volver al formulario</a>
             </div>
-        </section>
-        <div class="text-center mt-4">
-            <a href="/usuarios/registrar" class="btn btn-primary">Volver al formulario</a>
-        </div>
+        </main>
 
         <footer th:replace="/fragments/footer :: footer"></footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

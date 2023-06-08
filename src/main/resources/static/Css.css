@@ -1,3 +1,21 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+main {
+    margin-bottom: 300px
+}
+
+
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 5px;
+}
+
 .navbar{
     max-height:120px; /* Alto del navbar */
 }
