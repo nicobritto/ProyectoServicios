@@ -26,8 +26,8 @@
                         </div>
                     </div>
 
-                    <div class="col-6 float-right">
-                        <div class="card-container container-wrapperMasInfo">
+                    <div class="col-6 float-right" id="divComentarios">
+                        <div class="card-container container-wrapperMasInfo" id="divComentarios">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" th:each="trabajo : ${trabajos}">
                                 <div class="card-header" th:text="${trabajo.usuario.nombre}"></div>
                                 <div class="card-body">
