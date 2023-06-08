@@ -430,8 +430,13 @@ body {
 }
 
 
+    
+#ingreseRubro {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 22px;
+}
 
-
-
-
-
+.dosBotones {
+    display: flex;
+}

@@ -4,19 +4,17 @@
     <body>
         <main>
             <nav th:replace="/fragments/navbar :: nav"></nav>
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col col-4">
-                        <h2>Ingrese el Rubro:</h2>
-                        <form  th:action= "@{/rubro/guardar}" method="POST" >
-                            <div  class="mb-3"> 
-                                <input type="text" placeholder="Nombre del rubro" class="form-control" name="rubros" th:value="${rubros}">
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
 
-                        </form>
-
-                    </div>
+            <div class="row justify-content-center">
+                <div class="form-register with-background">
+                    <form  th:action= "@{/rubro/guardar}" method="POST" class="formulario" >
+                        <h2 id="ingreseRubro">Ingrese el Rubro:</h2>
+                        <div  class="mb-3"> 
+                            <input type="text" placeholder="Nombre del rubro" class="controls" name="rubros" th:value="${rubros}">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 botones">Guardar</button>
+                       
+                    </form>
 
                 </div>
 
